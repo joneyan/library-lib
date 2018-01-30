@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libReadertypeDao_EXT">
+<resultMap id="libReadertype" type="com.lib.model.LibReadertype">
+
+<result property="brownum" column="brownum" />
+<result property="rolename" column="rolename" />
+<result property="id" column="id" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.brownum !=null and entity.brownum !=''">,brownum </if>
+
+<if test="entity.rolename !=null and entity.rolename !=''">,rolename </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.brownum !=null and entity.brownum !=''">,#{entity.brownum} </if>
+
+<if test="entity.rolename !=null and entity.rolename !=''">,#{entity.rolename} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+brownum,
+rolename,
+id,
+</sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.brownum !=null and entity.brownum !=''">,brownum = #{entity.brownum}</if>
+<if test="entity.rolename !=null and entity.rolename !=''">,rolename = #{entity.rolename}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="entity.brownum !=null and entity.brownum !=''">,brownum = #{entity.brownum}</if>
+<if test="condition.brownum !=null and condition.brownum !=''"> AND brownum = #{condition.brownum}</if>
+<if test="entity.rolename !=null and entity.rolename !=''">,rolename = #{entity.rolename}</if>
+<if test="condition.rolename !=null and condition.rolename !=''"> AND rolename = #{condition.rolename}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.brownum')">,brownum = #{entity.brownum}</if>
+<if test="_parameter_containsKey('entity.rolename')">,rolename = #{entity.rolename}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+</trim>
+</sql>
+</mapper>

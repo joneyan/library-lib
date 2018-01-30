@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Mosaddek">
+        <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+        <#include "/base/baseJS.html"/>
+    </head>
+  <body>
+
+  <section id="container" class="">
+      <!--header start 头文件  标题log 提醒，用户等等..-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+          <#include "/base/topmenu.html"/>
+          <#include "/base/topnav.html"/>
+        </header>
+      <!--header end-->
+      <!--sidebar start 左边菜单栏-->
+        <#include "/base/sidebar.html"/>
+      <!--sidebar end-->
+      <!--main content start 内容-->
+      <section id="main-content">
+          <#include "/base/testContent.html"/>
+      </section>
+      <!--main content end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="<@baseUrl.static />/js/jquery.scrollTo.min.js"></script>
+  <script src="<@baseUrl.static />/js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="<@baseUrl.static />/js/jquery.sparkline.js" type="text/javascript"></script>
+  <script src="<@baseUrl.static />/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+  <script src="<@baseUrl.static />/js/owl.carousel.js" ></script>
+  <script src="<@baseUrl.static />/js/jquery.customSelect.min.js" ></script>
+  <!--common script for all pages-->
+  <script src="<@baseUrl.static />/js/common-scripts.js"></script>
+  <!--script for this page-->
+  <script src="<@baseUrl.static />/js/sparkline-chart.js"></script>
+  <script src="<@baseUrl.static />/js/easy-pie-chart.js"></script>
+  <script>
+      //owl carousel
+      $(document).ready(function() {
+          $("#owl-demo").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true
+
+          });
+      });
+
+      //custom select box
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
+
+  </body>
+</html>

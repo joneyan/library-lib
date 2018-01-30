@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libLibraryDao">
+<resultMap id="libLibrary" type="com.lib.model.LibLibrary">
+
+<result property="libarayname" column="libarayname" />
+<result property="curator" column="curator" />
+<result property="address" column="address" />
+<result property="createdate" column="createdate" />
+<result property="tel" column="tel" />
+<result property="id" column="id" />
+<result property="email" column="email" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.libarayname !=null and entity.libarayname !=''">,libarayname </if>
+
+<if test="entity.curator !=null and entity.curator !=''">,curator </if>
+
+<if test="entity.address !=null and entity.address !=''">,address </if>
+
+<if test="entity.createdate !=null and entity.createdate !=''">,createdate </if>
+
+<if test="entity.tel !=null and entity.tel !=''">,tel </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.email !=null and entity.email !=''">,email </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.libarayname !=null and entity.libarayname !=''">,#{entity.libarayname} </if>
+
+<if test="entity.curator !=null and entity.curator !=''">,#{entity.curator} </if>
+
+<if test="entity.address !=null and entity.address !=''">,#{entity.address} </if>
+
+<if test="entity.createdate !=null and entity.createdate !=''">,#{entity.createdate} </if>
+
+<if test="entity.tel !=null and entity.tel !=''">,#{entity.tel} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.email !=null and entity.email !=''">,#{entity.email} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+<trim prefix="" prefixOverrides=",">,libarayname
+,curator
+,address
+,createdate
+,tel
+,id
+,email
+</trim></sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.libarayname !=null and entity.libarayname !=''">,libarayname = #{entity.libarayname}</if>
+<if test="entity.curator !=null and entity.curator !=''">,curator = #{entity.curator}</if>
+<if test="entity.address !=null and entity.address !=''">,address = #{entity.address}</if>
+<if test="entity.createdate !=null and entity.createdate !=''">,createdate = #{entity.createdate}</if>
+<if test="entity.tel !=null and entity.tel !=''">,tel = #{entity.tel}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.email !=null and entity.email !=''">,email = #{entity.email}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="condition.libarayname !=null and condition.libarayname !=''"> AND libarayname = #{condition.libarayname}</if>
+<if test="condition.curator !=null and condition.curator !=''"> AND curator = #{condition.curator}</if>
+<if test="condition.address !=null and condition.address !=''"> AND address = #{condition.address}</if>
+<if test="condition.createdate !=null and condition.createdate !=''"> AND createdate = #{condition.createdate}</if>
+<if test="condition.tel !=null and condition.tel !=''"> AND tel = #{condition.tel}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="condition.email !=null and condition.email !=''"> AND email = #{condition.email}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.libarayname')">,libarayname = #{entity.libarayname}</if>
+<if test="_parameter_containsKey('entity.curator')">,curator = #{entity.curator}</if>
+<if test="_parameter_containsKey('entity.address')">,address = #{entity.address}</if>
+<if test="_parameter_containsKey('entity.createdate')">,createdate = #{entity.createdate}</if>
+<if test="_parameter_containsKey('entity.tel')">,tel = #{entity.tel}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.email')">,email = #{entity.email}</if>
+</trim>
+</sql>
+<insert id="insert" parameterType="java.util.Map">
+<selectKey keyProperty="entity.id" resultType="java.lang.String" order="BEFORE">
+call generate_no('SU',8,'lib_library',@newOrderNo)
+</selectKey>
+REPLACE INTO lib_library (
+<include refid="sql_insert_column_list" />
+) VALUES (
+<include refid="sql_insert_property_list" />
+)
+</insert>
+<select id="get" parameterType="java.util.Map" resultMap="libLibrary">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_library
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="getById" parameterType="java.util.Map" resultMap="libLibrary">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_library
+WHERE id = #{id}
+</select>
+<select id="find" parameterType="java.util.Map" resultMap="libLibrary">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_library
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+<if test="offset != null">
+<include refid="sql_pagination_end" />
+</if>
+</select>
+<select id="findByIdList" parameterType="java.util.Map" resultMap="libLibrary">
+SELECT
+<include refid="sql_column_list" />
+ FROM lib_library
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+</select>
+<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+SELECT count(${count_column}) AS count_ FROM lib_library
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+SELECT ${aggregate_sql} FROM lib_library
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<update id="update" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="updateById" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_update_set" />
+WHERE id = #{id}
+</update>
+<update id="updateByIdList" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<update id="forceUpdate" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_force_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="forceUpdateById" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_force_update_set" />
+WHERE id = #{id}
+</update>
+<update id="forceUpdateByIdList" parameterType="java.util.Map">
+UPDATE lib_library
+<include refid="sql_force_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<delete id="remove" parameterType="java.util.Map">
+DELETE FROM lib_library
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</delete>
+<delete id="removeById" parameterType="java.util.Map">
+DELETE FROM lib_library
+WHERE id = #{id}
+</delete>
+<delete id="removeByIdList" parameterType="java.util.Map">
+DELETE FROM lib_library
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</delete>
+
+</mapper>

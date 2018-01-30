@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libPressDao_EXT">
+<resultMap id="libPress" type="com.lib.model.LibPress">
+
+<result property="pubname" column="pubname" />
+<result property="id" column="id" />
+<result property="status" column="status" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.pubname !=null and entity.pubname !=''">,pubname </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.status !=null and entity.status !=''">,status </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.pubname !=null and entity.pubname !=''">,#{entity.pubname} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.status !=null and entity.status !=''">,#{entity.status} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+pubname,
+id,
+status,
+</sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.pubname !=null and entity.pubname !=''">,pubname = #{entity.pubname}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="entity.pubname !=null and entity.pubname !=''">,pubname = #{entity.pubname}</if>
+<if test="condition.pubname !=null and condition.pubname !=''"> AND pubname = #{condition.pubname}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
+<if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.pubname')">,pubname = #{entity.pubname}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.status')">,status = #{entity.status}</if>
+</trim>
+</sql>
+</mapper>

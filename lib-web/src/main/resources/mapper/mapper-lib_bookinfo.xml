@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libBookinfoDao">
+<resultMap id="libBookinfo" type="com.lib.model.LibBookinfo">
+
+<result property="intime" column="intime" />
+<result property="author" column="author" />
+<result property="isbn" column="isbn" />
+<result property="operator" column="operator" />
+<result property="leftnum" column="leftnum" />
+<result property="totalnum" column="totalnum" />
+<result property="price" column="price" />
+<result property="bookcaseid" column="bookcaseid" />
+<result property="pressid" column="pressid" />
+<result property="typeid" column="typeid" />
+<result property="id" column="id" />
+<result property="page" column="page" />
+<result property="bookname" column="bookname" />
+<result property="barcode" column="barcode" />
+<result property="status" column="status" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.intime !=null and entity.intime !=''">,intime </if>
+
+<if test="entity.author !=null and entity.author !=''">,author </if>
+
+<if test="entity.isbn !=null and entity.isbn !=''">,isbn </if>
+
+<if test="entity.operator !=null and entity.operator !=''">,operator </if>
+
+<if test="entity.leftnum !=null and entity.leftnum !=''">,leftnum </if>
+
+<if test="entity.totalnum !=null and entity.totalnum !=''">,totalnum </if>
+
+<if test="entity.price !=null and entity.price !=''">,price </if>
+
+<if test="entity.bookcaseid !=null and entity.bookcaseid !=''">,bookcaseid </if>
+
+<if test="entity.pressid !=null and entity.pressid !=''">,pressid </if>
+
+<if test="entity.typeid !=null and entity.typeid !=''">,typeid </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.page !=null and entity.page !=''">,page </if>
+
+<if test="entity.bookname !=null and entity.bookname !=''">,bookname </if>
+
+<if test="entity.barcode !=null and entity.barcode !=''">,barcode </if>
+
+<if test="entity.status !=null and entity.status !=''">,status </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.intime !=null and entity.intime !=''">,#{entity.intime} </if>
+
+<if test="entity.author !=null and entity.author !=''">,#{entity.author} </if>
+
+<if test="entity.isbn !=null and entity.isbn !=''">,#{entity.isbn} </if>
+
+<if test="entity.operator !=null and entity.operator !=''">,#{entity.operator} </if>
+
+<if test="entity.leftnum !=null and entity.leftnum !=''">,#{entity.leftnum} </if>
+
+<if test="entity.totalnum !=null and entity.totalnum !=''">,#{entity.totalnum} </if>
+
+<if test="entity.price !=null and entity.price !=''">,#{entity.price} </if>
+
+<if test="entity.bookcaseid !=null and entity.bookcaseid !=''">,#{entity.bookcaseid} </if>
+
+<if test="entity.pressid !=null and entity.pressid !=''">,#{entity.pressid} </if>
+
+<if test="entity.typeid !=null and entity.typeid !=''">,#{entity.typeid} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.page !=null and entity.page !=''">,#{entity.page} </if>
+
+<if test="entity.bookname !=null and entity.bookname !=''">,#{entity.bookname} </if>
+
+<if test="entity.barcode !=null and entity.barcode !=''">,#{entity.barcode} </if>
+
+<if test="entity.status !=null and entity.status !=''">,#{entity.status} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+<trim prefix="" prefixOverrides=",">,intime
+,author
+,isbn
+,operator
+,leftnum
+,totalnum
+,price
+,bookcaseid
+,pressid
+,typeid
+,id
+,page
+,bookname
+,barcode
+,status
+</trim></sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.intime !=null and entity.intime !=''">,intime = #{entity.intime}</if>
+<if test="entity.author !=null and entity.author !=''">,author = #{entity.author}</if>
+<if test="entity.isbn !=null and entity.isbn !=''">,isbn = #{entity.isbn}</if>
+<if test="entity.operator !=null and entity.operator !=''">,operator = #{entity.operator}</if>
+<if test="entity.leftnum !=null and entity.leftnum !=''">,leftnum = #{entity.leftnum}</if>
+<if test="entity.totalnum !=null and entity.totalnum !=''">,totalnum = #{entity.totalnum}</if>
+<if test="entity.price !=null and entity.price !=''">,price = #{entity.price}</if>
+<if test="entity.bookcaseid !=null and entity.bookcaseid !=''">,bookcaseid = #{entity.bookcaseid}</if>
+<if test="entity.pressid !=null and entity.pressid !=''">,pressid = #{entity.pressid}</if>
+<if test="entity.typeid !=null and entity.typeid !=''">,typeid = #{entity.typeid}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.page !=null and entity.page !=''">,page = #{entity.page}</if>
+<if test="entity.bookname !=null and entity.bookname !=''">,bookname = #{entity.bookname}</if>
+<if test="entity.barcode !=null and entity.barcode !=''">,barcode = #{entity.barcode}</if>
+<if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="condition.intime !=null and condition.intime !=''"> AND intime = #{condition.intime}</if>
+<if test="condition.author !=null and condition.author !=''"> AND author = #{condition.author}</if>
+<if test="condition.isbn !=null and condition.isbn !=''"> AND isbn = #{condition.isbn}</if>
+<if test="condition.operator !=null and condition.operator !=''"> AND operator = #{condition.operator}</if>
+<if test="condition.leftnum !=null and condition.leftnum !=''"> AND leftnum = #{condition.leftnum}</if>
+<if test="condition.totalnum !=null and condition.totalnum !=''"> AND totalnum = #{condition.totalnum}</if>
+<if test="condition.price !=null and condition.price !=''"> AND price = #{condition.price}</if>
+<if test="condition.bookcaseid !=null and condition.bookcaseid !=''"> AND bookcaseid = #{condition.bookcaseid}</if>
+<if test="condition.pressid !=null and condition.pressid !=''"> AND pressid = #{condition.pressid}</if>
+<if test="condition.typeid !=null and condition.typeid !=''"> AND typeid = #{condition.typeid}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="condition.page !=null and condition.page !=''"> AND page = #{condition.page}</if>
+<if test="condition.bookname !=null and condition.bookname !=''"> AND bookname = #{condition.bookname}</if>
+<if test="condition.barcode !=null and condition.barcode !=''"> AND barcode = #{condition.barcode}</if>
+<if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.intime')">,intime = #{entity.intime}</if>
+<if test="_parameter_containsKey('entity.author')">,author = #{entity.author}</if>
+<if test="_parameter_containsKey('entity.isbn')">,isbn = #{entity.isbn}</if>
+<if test="_parameter_containsKey('entity.operator')">,operator = #{entity.operator}</if>
+<if test="_parameter_containsKey('entity.leftnum')">,leftnum = #{entity.leftnum}</if>
+<if test="_parameter_containsKey('entity.totalnum')">,totalnum = #{entity.totalnum}</if>
+<if test="_parameter_containsKey('entity.price')">,price = #{entity.price}</if>
+<if test="_parameter_containsKey('entity.bookcaseid')">,bookcaseid = #{entity.bookcaseid}</if>
+<if test="_parameter_containsKey('entity.pressid')">,pressid = #{entity.pressid}</if>
+<if test="_parameter_containsKey('entity.typeid')">,typeid = #{entity.typeid}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.page')">,page = #{entity.page}</if>
+<if test="_parameter_containsKey('entity.bookname')">,bookname = #{entity.bookname}</if>
+<if test="_parameter_containsKey('entity.barcode')">,barcode = #{entity.barcode}</if>
+<if test="_parameter_containsKey('entity.status')">,status = #{entity.status}</if>
+</trim>
+</sql>
+<insert id="insert" parameterType="java.util.Map">
+<selectKey keyProperty="entity.id" resultType="java.lang.String" order="BEFORE">
+call generate_no('SU',8,'lib_bookinfo',@newOrderNo)
+</selectKey>
+REPLACE INTO lib_bookinfo (
+<include refid="sql_insert_column_list" />
+) VALUES (
+<include refid="sql_insert_property_list" />
+)
+</insert>
+<select id="get" parameterType="java.util.Map" resultMap="libBookinfo">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_bookinfo
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="getById" parameterType="java.util.Map" resultMap="libBookinfo">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_bookinfo
+WHERE id = #{id}
+</select>
+<select id="find" parameterType="java.util.Map" resultMap="libBookinfo">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_bookinfo
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+<if test="offset != null">
+<include refid="sql_pagination_end" />
+</if>
+</select>
+<select id="findByIdList" parameterType="java.util.Map" resultMap="libBookinfo">
+SELECT
+<include refid="sql_column_list" />
+ FROM lib_bookinfo
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+</select>
+<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+SELECT count(${count_column}) AS count_ FROM lib_bookinfo
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+SELECT ${aggregate_sql} FROM lib_bookinfo
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<update id="update" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="updateById" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_update_set" />
+WHERE id = #{id}
+</update>
+<update id="updateByIdList" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<update id="forceUpdate" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_force_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="forceUpdateById" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_force_update_set" />
+WHERE id = #{id}
+</update>
+<update id="forceUpdateByIdList" parameterType="java.util.Map">
+UPDATE lib_bookinfo
+<include refid="sql_force_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<delete id="remove" parameterType="java.util.Map">
+DELETE FROM lib_bookinfo
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</delete>
+<delete id="removeById" parameterType="java.util.Map">
+DELETE FROM lib_bookinfo
+WHERE id = #{id}
+</delete>
+<delete id="removeByIdList" parameterType="java.util.Map">
+DELETE FROM lib_bookinfo
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</delete>
+
+</mapper>

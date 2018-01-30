@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libManagerDao_EXT">
+<resultMap id="libManager" type="com.lib.model.LibManager">
+
+<result property="password" column="password" />
+<result property="id" column="id" />
+<result property="username" column="username" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.password !=null and entity.password !=''">,password </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.username !=null and entity.username !=''">,username </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.password !=null and entity.password !=''">,#{entity.password} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.username !=null and entity.username !=''">,#{entity.username} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+password,
+id,
+username,
+</sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.password !=null and entity.password !=''">,password = #{entity.password}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.username !=null and entity.username !=''">,username = #{entity.username}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="entity.password !=null and entity.password !=''">,password = #{entity.password}</if>
+<if test="condition.password !=null and condition.password !=''"> AND password = #{condition.password}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="entity.username !=null and entity.username !=''">,username = #{entity.username}</if>
+<if test="condition.username !=null and condition.username !=''"> AND username = #{condition.username}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.password')">,password = #{entity.password}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.username')">,username = #{entity.username}</if>
+</trim>
+</sql>
+</mapper>

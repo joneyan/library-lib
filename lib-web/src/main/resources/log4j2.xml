@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j2 的配置文件 -->
+<Configuration status="DEBUG" strict="true" name="idc" packages="com.lib">
+    <properties>
+        <property name="logPath">log</property>
+    </properties>
+
+    <Appenders>
+        <!--配置控制台输出样式-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss} %d{UNIX_MILLIS} [%t] %-5p %C{1.}:%L - %msg%n}"/>
+            <!--<JsonLayout complete="true" locationInfo="true"/>-->
+        </Console>
+        <!-- 配置Kafka日志主动采集，Storm会将日志解析成字段存放在HBase中。 -->
+        <!--<Kafka name="Kafka" topic="server_log">-->
+            <!--&lt;!&ndash;使用JSON传输日志文件&ndash;&gt;-->
+            <!--<JsonLayout complete="true" locationInfo="true"/>-->
+            <!--&lt;!&ndash;Kafka集群配置，需要在本机配置Hosts文件，或者通过Nginx配置&ndash;&gt;-->
+            <!--<Property name="bootstrap.servers">Kafka-01:9092,Kafka-02:9092,Kafka-03:9092</Property>-->
+        <!--</Kafka>-->
+        <!--info级别日志归档-->
+        <RollingFile name="RollingFileInfo" fileName="${log_path}/info.log"
+                     filePattern="${log_path}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="INFO" />
+                <ThresholdFilter level="WARN" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+            </Filters>
+            <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="2 MB" />
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="0" max="10"/>
+        </RollingFile>
+        <!--Warn级别日志归档-->
+        <RollingFile name="RollingFileWarn" fileName="${log_path}/warn.log"
+                     filePattern="${log_path}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="WARN" />
+                <ThresholdFilter level="ERROR" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+            </Filters>
+            <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="2 MB" />
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="0" max="10"/>
+        </RollingFile>
+        <!--error日志归档-->
+        <RollingFile name="RollingFileError" fileName="${log_path}/error.log"
+                     filePattern="${log_path}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <ThresholdFilter level="ERROR" />
+            <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="2 MB" />
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="0" max="10"/>
+        </RollingFile>
+        <!-- 配置mongdb appender -->
+        <!--controller 日志-->
+        <NoSql name="mongoAppenderController">
+            <JsonLayout complete="true" locationInfo="true"/>
+            <MongoDb databaseName="idc" collectionName="ControllerLogs" server="211.159.185.157" port="27017"/>
+        </NoSql>
+        <!--API 日志-->
+        <NoSql name="mongoAppenderAPI">
+            <JsonLayout complete="true" locationInfo="true"/>
+            <MongoDb databaseName="idc" collectionName="ApiLogs" server="211.159.185.157" port="27017"/>
+        </NoSql>
+        <!--Dao 日志-->
+        <NoSql name="mongoAppenderDao">
+            <JsonLayout complete="true" locationInfo="true"/>
+            <MongoDb databaseName="idc" collectionName="DaoLogs" server="211.159.185.157" port="27017"/>
+        </NoSql>
+        <!--Http请求 日志-->
+        <NoSql name="mongoAppenderHttp">
+            <JsonLayout complete="true" locationInfo="true"/>
+            <MongoDb databaseName="idc" collectionName="HttpLogs" server="211.159.185.157" port="27017"/>
+        </NoSql>
+    </Appenders>
+    <Loggers>
+        <!--过滤掉spring和hibernate的一些无用的debug信息 -->
+        <logger name="org.springframework" level="INFO">
+        </logger>
+        <logger name="org.mybatis" level="INFO">
+        </logger>
+        <logger name="org.mongodb.driver" level="INFO">
+        </logger>
+        <!--采集controller日志-->
+        <logger name="com.lib.controller" additivity="false">
+            <!--指定类的日志级别，会影响指定类日志发出信息的成功与否-->
+            <appender-ref ref="mongoAppenderController" />
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileWarn" />
+            <appender-ref ref="RollingFileError" />
+        </logger>
+        <!--采集api日志-->
+        <logger name="com.lib.api" additivity="false">
+            <appender-ref ref="mongoAppenderAPI" />
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileWarn" />
+            <appender-ref ref="RollingFileError" />
+        </logger>
+
+        <!--采集dao日志-->
+        <logger name="com.lib.dao" additivity="false">
+            <appender-ref ref="mongoAppenderDao" />
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileWarn" />
+            <appender-ref ref="RollingFileError" />
+        </logger>
+        <!--请求收集日志-->
+        <logger name="com.lib.interceptor.ControllerInterceptor" additivity="false">
+            <appender-ref ref="mongoAppenderHttp" />
+            <appender-ref ref="Console"/>
+        </logger>
+        <Root level="DEBUG">
+
+            <!--启用控制台输出日志-->
+            <AppenderRef ref="Console"/>
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileWarn" />
+            <appender-ref ref="RollingFileError" />
+            <!--输出日志到mongdb-->.
+            <!--<appender-ref ref="mongoAppender" />-->
+            <!--启用Kafka采集日志-->
+            <!--<AppenderRef ref="Kafka"/>-->
+        </Root>
+    </Loggers>
+</Configuration>

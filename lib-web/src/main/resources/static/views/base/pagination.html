@@ -1,0 +1,71 @@
+<#macro pagination>
+            <#assign paging_pre = 1>
+            <#assign paging_next = 1>
+            <#if (p.lastPageNumber == p.firstPageNumber)>
+                <#assign paging_pre = p.firstPageNumber>
+                <#assign paging_next = p.lastPageNumber>
+            </#if>
+            <#if (p.pageNumber > 1) >
+                <#assign paging_pre = (p.pageNumber - 1)>
+            </#if>
+            <#if (p.pageNumber lt p.lastPageNumber) >
+                <#assign paging_next = (p.pageNumber+1)>
+             </#if>
+                <div class="pagination-div" style="display:flex;justify-content: flex-start;width: auto">
+
+                    <div class="btn-group btn-group-justified">
+                            <a title="INFO" class="btn btn-info" id='info-page' style="width: 10px" ondragstart="return false;"><span>共</span><strong>${p.totalNumberOfElements}</strong><span>条记录，</span><strong>${p.pageNumber}/${p.lastPageNumber}</strong><span>页</span></a>
+                            <a title="首　页" class="btn btn-info" id='paging-first' ondragstart="return false;" href="<@baseUrl.home />${timer(p.firstPageNumber)}">首页</a>
+                            <a title="上一页" class="btn btn-info" id='paging-pre' ondragstart="return false;"  href="<@baseUrl.home />${timer(paging_pre)}">上一页</a>
+                            <a title="下一页" class="btn btn-info" id='paging-next' ondragstart="return false;" href="<@baseUrl.home />${timer(paging_next)}">下一页</a>
+                            <a title="尾　页"  class="btn btn-info" id='paging-last' ondragstart="return false;" href="<@baseUrl.home />${timer(p.lastPageNumber)}">尾页</a>
+                            <a title="页码" style="width: 10px" class="btn btn-info" ondragstart="return false;" >
+                                <input type="text" class="form-control" style="width: auto" id="page" name="pageNumber" placeholder="页码">
+                            </a>
+                            <a title="跳　转" style="width: 20px" class="btn btn-info" id="queryPage" href="javascript:void(0);" onclick="queryPage(this);" ondragstart="return false;">跳转</a>
+                    </div>
+                </div>
+                <script src="<@baseUrl.static />/js/jquery.js"></script>
+                    <script src="<@baseUrl.static />/js/jquery-1.8.3.min.js"></script>
+                    <script>
+                        function queryPage(obj){
+                            try{
+                                var v_page = $("#page").val() ;
+                                if(!isIntegerError(v_page) || (v_page>${p.lastPageNumber} || v_page<1) ){
+                                    alert("您输入的页码无效！");
+                                    $("#page").val("");
+                                    return false;
+                                }
+
+                                var url = $("#paging-first").attr("href");
+                                if(url.indexOf("?")>0){
+                                    url = url+'&pageNumber='+v_page;
+                                }else{
+                                    url = url+'?pageNumber='+v_page;
+                                }
+
+                                $("#queryPage").attr("href",url);
+                            }catch(e){
+
+                            }
+                        }
+                        $(document).ready(function(){
+                            document.onkeydown = function(event){
+                                if (event.keyCode == 13 && document.activeElement==$("#page")[0]){
+                                    document.getElementById("queryPage").click();
+                                    //queryPage($(".queryPage")[0]);
+                                }else if(event.keyCode == 13 && document.activeElement != $("#page")[0]){
+                                    return false;
+                                }
+                            } ;
+                        });
+
+                        function isIntegerError(v_page){
+                            var exp = /^[0-9]*$/;
+                            if( v_page!="" && !exp.test(v_page)){
+                                return false;
+                            }
+                            return true;
+                        }
+                    </script>
+</#macro>

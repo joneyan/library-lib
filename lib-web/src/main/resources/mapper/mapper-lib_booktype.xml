@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libBooktypeDao">
+<resultMap id="libBooktype" type="com.lib.model.LibBooktype">
+
+<result property="days" column="days" />
+<result property="id" column="id" />
+<result property="typename" column="typename" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.days !=null and entity.days !=''">,days </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.typename !=null and entity.typename !=''">,typename </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.days !=null and entity.days !=''">,#{entity.days} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.typename !=null and entity.typename !=''">,#{entity.typename} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+<trim prefix="" prefixOverrides=",">,days
+,id
+,typename
+</trim></sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.days !=null and entity.days !=''">,days = #{entity.days}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.typename !=null and entity.typename !=''">,typename = #{entity.typename}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="condition.days !=null and condition.days !=''"> AND days = #{condition.days}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="condition.typename !=null and condition.typename !=''"> AND typename = #{condition.typename}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.days')">,days = #{entity.days}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.typename')">,typename = #{entity.typename}</if>
+</trim>
+</sql>
+<insert id="insert" parameterType="java.util.Map">
+<selectKey keyProperty="entity.id" resultType="java.lang.String" order="BEFORE">
+call generate_no('SU',8,'lib_booktype',@newOrderNo)
+</selectKey>
+REPLACE INTO lib_booktype (
+<include refid="sql_insert_column_list" />
+) VALUES (
+<include refid="sql_insert_property_list" />
+)
+</insert>
+<select id="get" parameterType="java.util.Map" resultMap="libBooktype">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_booktype
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="getById" parameterType="java.util.Map" resultMap="libBooktype">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_booktype
+WHERE id = #{id}
+</select>
+<select id="find" parameterType="java.util.Map" resultMap="libBooktype">
+SELECT
+<include refid="sql_column_list" />
+FROM lib_booktype
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+<if test="offset != null">
+<include refid="sql_pagination_end" />
+</if>
+</select>
+<select id="findByIdList" parameterType="java.util.Map" resultMap="libBooktype">
+SELECT
+<include refid="sql_column_list" />
+ FROM lib_booktype
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+<if test="orderBy != null">
+ORDER BY ${orderBy}
+</if>
+</select>
+<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+SELECT count(${count_column}) AS count_ FROM lib_booktype
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<select id="aggregate" parameterType="java.util.Map" resultType="java.util.HashMap">
+SELECT ${aggregate_sql} FROM lib_booktype
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</select>
+<update id="update" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="updateById" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_update_set" />
+WHERE id = #{id}
+</update>
+<update id="updateByIdList" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<update id="forceUpdate" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_force_update_set" />
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</update>
+<update id="forceUpdateById" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_force_update_set" />
+WHERE id = #{id}
+</update>
+<update id="forceUpdateByIdList" parameterType="java.util.Map">
+UPDATE lib_booktype
+<include refid="sql_force_update_set" />
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</update>
+<delete id="remove" parameterType="java.util.Map">
+DELETE FROM lib_booktype
+<trim prefix="WHERE" prefixOverrides="AND">
+<include refid="sql_condition" />
+</trim>
+</delete>
+<delete id="removeById" parameterType="java.util.Map">
+DELETE FROM lib_booktype
+WHERE id = #{id}
+</delete>
+<delete id="removeByIdList" parameterType="java.util.Map">
+DELETE FROM lib_booktype
+WHERE id IN
+<foreach collection="idList" item="id" open="(" separator="," close=")">
+#{id}
+</foreach>
+<include refid="sql_condition" />
+</delete>
+
+</mapper>

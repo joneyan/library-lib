@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="libManagerpowerDao_EXT">
+<resultMap id="libManagerpower" type="com.lib.model.LibManagerpower">
+
+<result property="bookset" column="bookset" />
+<result property="borrowback" column="borrowback" />
+<result property="readerset" column="readerset" />
+<result property="sysset" column="sysset" />
+<result property="id" column="id" />
+<result property="sysquery" column="sysquery" /></resultMap>
+<sql id="sql_insert_column_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.bookset !=null and entity.bookset !=''">,bookset </if>
+
+<if test="entity.borrowback !=null and entity.borrowback !=''">,borrowback </if>
+
+<if test="entity.readerset !=null and entity.readerset !=''">,readerset </if>
+
+<if test="entity.sysset !=null and entity.sysset !=''">,sysset </if>
+
+<if test="entity.id !=null and entity.id !=''">,id </if>
+
+<if test="entity.sysquery !=null and entity.sysquery !=''">,sysquery </if>
+</trim>
+</sql>
+<sql id="sql_insert_property_list">
+<trim prefix="" prefixOverrides=",">
+
+<if test="entity.bookset !=null and entity.bookset !=''">,#{entity.bookset} </if>
+
+<if test="entity.borrowback !=null and entity.borrowback !=''">,#{entity.borrowback} </if>
+
+<if test="entity.readerset !=null and entity.readerset !=''">,#{entity.readerset} </if>
+
+<if test="entity.sysset !=null and entity.sysset !=''">,#{entity.sysset} </if>
+
+<if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
+
+<if test="entity.sysquery !=null and entity.sysquery !=''">,#{entity.sysquery} </if>
+</trim>
+</sql>
+<sql id="sql_column_list">
+bookset,
+borrowback,
+readerset,
+sysset,
+id,
+sysquery,
+</sql>
+<sql id="sql_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="entity != null"><if test="entity.bookset !=null and entity.bookset !=''">,bookset = #{entity.bookset}</if>
+<if test="entity.borrowback !=null and entity.borrowback !=''">,borrowback = #{entity.borrowback}</if>
+<if test="entity.readerset !=null and entity.readerset !=''">,readerset = #{entity.readerset}</if>
+<if test="entity.sysset !=null and entity.sysset !=''">,sysset = #{entity.sysset}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="entity.sysquery !=null and entity.sysquery !=''">,sysquery = #{entity.sysquery}</if>
+</if>
+</trim>
+</sql>
+<sql id="sql_condition">
+<if test="condition != null">
+<if test="entity.bookset !=null and entity.bookset !=''">,bookset = #{entity.bookset}</if>
+<if test="condition.bookset !=null and condition.bookset !=''"> AND bookset = #{condition.bookset}</if>
+<if test="entity.borrowback !=null and entity.borrowback !=''">,borrowback = #{entity.borrowback}</if>
+<if test="condition.borrowback !=null and condition.borrowback !=''"> AND borrowback = #{condition.borrowback}</if>
+<if test="entity.readerset !=null and entity.readerset !=''">,readerset = #{entity.readerset}</if>
+<if test="condition.readerset !=null and condition.readerset !=''"> AND readerset = #{condition.readerset}</if>
+<if test="entity.sysset !=null and entity.sysset !=''">,sysset = #{entity.sysset}</if>
+<if test="condition.sysset !=null and condition.sysset !=''"> AND sysset = #{condition.sysset}</if>
+<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+<if test="entity.sysquery !=null and entity.sysquery !=''">,sysquery = #{entity.sysquery}</if>
+<if test="condition.sysquery !=null and condition.sysquery !=''"> AND sysquery = #{condition.sysquery}</if>
+</if>
+</sql>
+<sql id="sql_pagination_end">
+<![CDATA[
+limit ${startRow-1},#{limit}
+]]>
+</sql><sql id="sql_force_update_set">
+<trim prefix="SET" prefixOverrides=",">
+<if test="_parameter_containsKey('entity.bookset')">,bookset = #{entity.bookset}</if>
+<if test="_parameter_containsKey('entity.borrowback')">,borrowback = #{entity.borrowback}</if>
+<if test="_parameter_containsKey('entity.readerset')">,readerset = #{entity.readerset}</if>
+<if test="_parameter_containsKey('entity.sysset')">,sysset = #{entity.sysset}</if>
+<if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
+<if test="_parameter_containsKey('entity.sysquery')">,sysquery = #{entity.sysquery}</if>
+</trim>
+</sql>
+</mapper>

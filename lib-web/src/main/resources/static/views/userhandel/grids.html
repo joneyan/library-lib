@@ -1,0 +1,96 @@
+<#import "/base/baseUrl.html" as baseUrl>
+<#import "/base/pagination.html" as pagination>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Mosaddek">
+        <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+        <#include "/base/baseJS.html"/>
+    </head>
+    <body>
+        <div class="col-lg-8" style="margin-top: 200px;margin-left: 200px">
+            <!--work progress start-->
+            <section class="panel">
+                <div class="panel-body progress-panel">
+                    <!--表格标题-->
+                    <div class="task-progress">
+                        <h1>用户列表</h1>
+                        <p>用户的基本信息</p>
+                    </div>
+                    <!--表格工具栏-->
+                    <div class="task-option">
+                        <select class="styled">
+                            <option>Anjelina Joli</option>
+                            <option>Tom Crouse</option>
+                            <option>Jhon Due</option>
+                        </select>
+                    </div>
+                </div>
+                <!--表格-->
+                <table class="table table-hover personal-task">
+                    <thead style="border-width: 0px">
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th class="hidden-phone">邮箱</th>
+                            <th class="hidden-phone">年龄</th>
+                            <th class="hidden-phone">创建时间</th>
+                            <th class="hidden-phone">资料</th>
+                            <th class="hidden-phone" align="center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#list p.thisPageElements as e>
+                            <tr>
+                                <td>${e_index+1+(p.pageNumber-1)*p.pageSize}</td>
+                                <td>${e.userName}</td>
+                                <td>${e.userMail}</td>
+                                <td>${e.userAge}</td>
+                                <td>${e.createTime?string('yyyy-MM')}</td>
+                                <td> <span class="badge bg-success">4${e_index+1+(p.pageNumber-1)*p.pageSize}%</span></td>
+                                <td align="left">
+                                    <div id="work-progress${e_index+1+(p.pageNumber-1)*p.pageSize}"></div>
+                                </td>
+                            </tr>
+                        </#list>
+                    </tbody>
+                </table>
+                <!--分页-->
+                <@pagination.pagination />
+            </section>
+            <!--work progress end-->
+        </div>
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="<@baseUrl.static />/js/jquery.scrollTo.min.js"></script>
+        <script src="<@baseUrl.static />/js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="<@baseUrl.static />/js/jquery.sparkline.js" type="text/javascript"></script>
+        <script src="<@baseUrl.static />/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="<@baseUrl.static />/js/owl.carousel.js" ></script>
+        <script src="<@baseUrl.static />/js/jquery.customSelect.min.js" ></script>
+        <!--common script for all pages-->
+        <script src="<@baseUrl.static />/js/common-scripts.js"></script>
+        <!--script for this page-->
+        <script src="<@baseUrl.static />/js/sparkline-chart.js"></script>
+        <script src="<@baseUrl.static />/js/easy-pie-chart.js"></script>
+    <script type="text/javascript">
+        //owl carousel
+        $(document).ready(function() {
+            $("#owl-demo").owlCarousel({
+                navigation : true,
+                slideSpeed : 300,
+                paginationSpeed : 400,
+                singleItem : true
+
+            });
+        });
+
+        //custom select box
+        $(function(){
+            $('select.styled').customSelect();
+        });
+    </script>
+    </body>
+</html>
