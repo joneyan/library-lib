@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -59,7 +60,11 @@ public class LibraryController {
      * @return
      */
     @RequestMapping("saveInfo")
-    public String saveInfo(HttpServletRequest request, Model model, LibLibrary library){
+    public String saveInfo(HttpServletRequest request, Model model, LibLibrary library,String createdate1){
+        String[] dates = createdate1.split("-");
+        Calendar instance = Calendar.getInstance();
+        instance.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]),Integer.parseInt(dates[2]));
+        System.out.println(instance);
         if(library !=null){
             System.out.println(library.getAddress());
             int update = libLibraryService.update(library, 1 + "");
@@ -69,6 +74,7 @@ public class LibraryController {
                 model.addAttribute("message","修改失败");
             }
         }
+        model.addAttribute("tourl","http://10.0.9.193:8088/library/getEditInfo");
         return "messager";
     }
 }

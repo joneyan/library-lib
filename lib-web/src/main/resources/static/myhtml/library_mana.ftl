@@ -84,8 +84,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a  href="">图书馆设置</a></li>
-                        <li><a class="" href="bookcase_mana.html">书架管理</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
                         <li><a class="" href="press_mana.html">出版社管理</a></li>
                         <li><a class="" href="manager_mana.html">管理员管理</a></li>
                         <li><a class="" href="stop_mana.html">封禁管理</a></li>
@@ -127,22 +127,17 @@
                         <li><a class="" href="book_return.html">图书归还</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a class="" href="javascript:;">
-                        <i class="icon-envelope"></i>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon-th"></i>
                         <span>系统查询</span>
-                        <ul class="sub">
-                            <li><a class="" href="book_list.html">图书档案查询</a></li>
-                            <li><a class="" href="book_borrowlist.html">图书借阅查询</a></li>
-                            <li><a class="" href="book_borrownotime.html">图书借阅快到期</a></li>
-                        </ul>
+                        <span class="arrow"></span>
                     </a>
-                </li>
-                <li class="">
-                    <a class="" href="index.html">
-                        <i class="icon-dashboard"></i>
-                        <span>首页</span>
-                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="book_list.html">图书档案查询</a></li>
+                        <li><a class="" href="book_borrowlist.html">图书借阅查询</a></li>
+                        <li><a class="" href="book_borrownotime.html">图书借阅快到期</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a class="" href="login.html">
@@ -156,7 +151,7 @@
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" style="background-image: url('${pagecontext.request.contextpath}/img/tsg3.jpg');height: 800px;">
             <div class="panel panel-primary">
                 <!-- Default panel contents -->
                 <div class="panel-heading"><h1>图书馆设置</h1></div>

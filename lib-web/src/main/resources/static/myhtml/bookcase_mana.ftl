@@ -26,6 +26,7 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid;text-align:center;border-collapse:collapse;}th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;}</style>
 </head>
 <body>
 
@@ -84,8 +85,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
                         <li><a class="" href="press_mana.html">出版社管理</a></li>
                         <li><a class="" href="manager_mana.html">管理员管理</a></li>
                         <li><a class="" href="stop_mana.html">封禁管理</a></li>
@@ -151,96 +152,54 @@
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
     <section id="main-content">
-        <section class="wrapper">
-            <div class="row state-overview">
-                <div class="col-lg-3 col-sm-6">
-                    <section class="panel">
-                        <div class="symbol terques">
-                            <i class="icon-user"></i>
+        <section class="wrapper" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active" style="background-color:lawngreen"><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架列表</a></li>
+                <li role="presentation" style="background-color: hotpink"><a href="${pagecontext.request.contextpath}/bookcase_add">新增书架</a></li>
+            </ul>
+            <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
+            <caption style="color: #18d4cb;font-size: 30px;">书架列表</caption>
+                <tr>
+                    <th style="text-align: center;">编号</th>
+                    <th style="text-align: center;">名字</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+                <#list pagebean.pageElements as case>
+                <tr>
+                    <td style="text-align: center;font-size: large;">${case.id}</td>
+                    <td style="text-align: center;font-size: large;">${case.casename}</td>
+                    <td style="text-align: center;font-size: large;">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/editbookcase'">
+                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
+                            </button>
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/romovebookcase'">
+                                <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
+                            </button>
                         </div>
-                        <div class="value">
-                            <a href="#"> <h1></h1>
-                                <p>新读者</p></a>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <section class="panel">
-                        <div class="symbol red">
-                            <i class="icon-tags"></i>
-                        </div>
-                        <div class="value">
-                            <a href="#"> <h1></h1>
-                                <p>借出数量</p></a>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <section class="panel">
-                        <div class="symbol yellow">
-                            <i class="icon-shopping-cart"></i>
-                        </div>
-                        <div class="value">
-                            <a href="#"><h1>345</h1>
-                                <p>近期入馆图书</p></a>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <section class="panel">
-                        <div class="symbol blue">
-                            <i class="icon-bar-chart"></i>
-                        </div>
-                        <div class="value">
-                            <a href="#"><h1>34,500</h1>
-                                <p>图书馆藏书</p></a>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><h1 class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;图书馆信息</h1></div>
-                <div class="panel-body">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;馆&nbsp;&nbsp;名：</span></span>
-                    <input type="text" name="libarayname" id="libarayname" class="form-control"
-                           value="${lib.libarayname}" readonly aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-user" aria-hidden="true">&nbsp;馆&nbsp;&nbsp;长：</span></span>
-                    <input type="text" name="curator" id="curator" class="form-control"
-                           value="${lib.curator}" readonly aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-home" aria-hidden="true">&nbsp;地&nbsp;&nbsp;址：</span></span>
-                    <input type="text" name="address" id="address" class="form-control"
-                           value="${lib.address}" readonly aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">&nbsp;创立时间：</span></span>
-                    <input type="text" name="createdate" id="createdate" class="form-control"
-                           value="${lib.createdate?string('yyyy-MM-dd')}" readonly aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon5"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true">&nbsp;电&nbsp;&nbsp;话：</span></span>
-                    <input type="text" name="tel" id="tel" class="form-control"
-                           value="${lib.tel}" readonly aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon6"><span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;邮&nbsp;&nbsp;箱：</span></span>
-                    <input type="text" name="email" id="email" class="form-control"
-                           value="${lib.email}" readonly aria-describedby="basic-addon1">
-                </div>
-            </div>
-            <div class="btn-group" role="group" aria-label="...">
-                <a href="${pagecontext.request.getcontextpath}/library/getEditInfo">
-                <button type="button" class="btn btn-default" style="background-color: peachpuff">
-                    <span class="glyphicon glyphicon-pencil" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改图书管信息</font></span>
-                </button>
-                </a>
-            </div>
+                    </td>
+                </tr>
+                </#list>
+            </table>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li>一共&nbsp;<span>${pagebean.totalNum}</span>&nbsp;条数据&nbsp;&nbsp;
+                        <span>${pagebean.page}</span>/<span>${pagebean.totalPage}</span>业</li>
+                    <#if pagebean.totalPage == pagebean.page &&pagebean.page==1>
+                    <li><a href="javascript:void(0)">上一页</a></li>
+                    <li><a href="javascript:void(0)">下一页</a></li>
+                    </#if>
+                    <#if pagebean.totalPage gt pagebean.page && pagebea.page != 1>
+                        <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page-1}">上一页</a></li>
+                        <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page+1}">下一页</a></li>
+                    </#if>
+
+                    <#if pagebean.totalPage == pagebean.page && pagebea.totalPage gt 1>
+                        <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page-1}">上一页</a></li>
+                        <li><a href="javascript():void(0)">下一页</a></li>
+                    </#if>
+                </ul>
+            </nav>
 
         </section>      </section>
     <!--main content end-->

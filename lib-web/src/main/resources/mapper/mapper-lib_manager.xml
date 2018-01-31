@@ -59,10 +59,7 @@ limit ${startRow-1},#{limit}
 </trim>
 </sql>
 <insert id="insert" parameterType="java.util.Map">
-<selectKey keyProperty="entity.id" resultType="java.lang.String" order="BEFORE">
-call generate_no('SU',8,'lib_manager',@newOrderNo)
-</selectKey>
-REPLACE INTO lib_manager (
+INSERT INTO lib_manager (
 <include refid="sql_insert_column_list" />
 ) VALUES (
 <include refid="sql_insert_property_list" />

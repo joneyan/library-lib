@@ -10,4 +10,13 @@ function saveInfo(){
         return ;
     }
     $("#edit_lib_info").submit();
+};
+function saveCaseInfo(){
+    var region=$("#region").val();
+    var casename=$("#casename").val();
+    if(region==""||casename==""){
+        $("#sp1").html("输入信息不可以为空！").css("color","red");
+        return ;
+    }
+    $("#saveCaseInfo").submit();
 }

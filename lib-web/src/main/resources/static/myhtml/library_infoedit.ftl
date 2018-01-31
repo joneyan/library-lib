@@ -84,8 +84,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="">图书馆设置</a></li>
-                        <li><a class="" href="bookcase_mana.html">书架管理</a></li>
+                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
                         <li><a class="" href="press_mana.html">出版社管理</a></li>
                         <li><a class="" href="manager_mana.html">管理员管理</a></li>
                         <li><a class="" href="stop_mana.html">封禁管理</a></li>
@@ -127,16 +127,17 @@
                         <li><a class="" href="book_return.html">图书归还</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a class="" href="javascript:;">
-                        <i class="icon-envelope"></i>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon-th"></i>
                         <span>系统查询</span>
-                        <ul class="sub">
-                            <li><a class="" href="book_list.html">图书档案查询</a></li>
-                            <li><a class="" href="book_borrowlist.html">图书借阅查询</a></li>
-                            <li><a class="" href="book_borrownotime.html">图书借阅快到期</a></li>
-                        </ul>
+                        <span class="arrow"></span>
                     </a>
+                    <ul class="sub">
+                        <li><a class="" href="book_list.html">图书档案查询</a></li>
+                        <li><a class="" href="book_borrowlist.html">图书借阅查询</a></li>
+                        <li><a class="" href="book_borrownotime.html">图书借阅快到期</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a class="" href="login.html">
@@ -222,7 +223,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">&nbsp;创立时间：</span></span>
-                    <input type="text" name="createdate" id="createdate" class="form-control"
+                    <input type="text" name="createdate1" id="createdate" class="form-control"
                            value="${lib.createdate?string('yyyy-MM-dd')}" readonly aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group">
