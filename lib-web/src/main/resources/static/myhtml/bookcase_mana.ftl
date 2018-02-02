@@ -26,8 +26,9 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
-    <style type="text/css">table{border:1px solid;text-align:center;border-collapse:collapse;}th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;}</style>
-</head>
+    <style type="text/css">table{border:1px solid; border-top:1px solid;text-align:center;border-collapse:collapse;}
+    th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}
+    td{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}</style></head>
 <body>
 
 <section id="container" class="">
@@ -51,7 +52,7 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <img alt="" src="${pagecontext.request.getcontextpath}/img/avatar1_small.jpg">
-                    <span class="username">严静</span>
+                    <span class="username">${managerlog.username}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
@@ -87,8 +88,10 @@
                     <ul class="sub">
                         <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
                         <li class="active"><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li><a class="" href="press_mana.html">出版社管理</a></li>
-                        <li><a class="" href="manager_mana.html">管理员管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                        <#if managerlog.status==1>
+                            <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                        </#if>
                         <li><a class="" href="stop_mana.html">封禁管理</a></li>
                     </ul>
                 </li>
@@ -173,7 +176,7 @@
                             <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/editbookcase'">
                                 <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
                             </button>
-                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/romovebookcase'">
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/romovebookcase?id=${case.id}'">
                                 <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
                             </button>
                         </div>
@@ -189,14 +192,19 @@
                     <li><a href="javascript:void(0)">上一页</a></li>
                     <li><a href="javascript:void(0)">下一页</a></li>
                     </#if>
-                    <#if pagebean.totalPage gt pagebean.page && pagebea.page != 1>
+
+                    <#if pagebean.totalPage gt pagebean.page && pagebean.page != 1>
                         <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page-1}">上一页</a></li>
                         <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page+1}">下一页</a></li>
                     </#if>
+                    <#if pagebean.totalPage gt pagebean.page && pagebean.page == 1>
+                        <li><a href="javascript:void(0)">上一页</a></li>
+                        <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page+1}">下一页</a></li>
+                    </#if>
 
-                    <#if pagebean.totalPage == pagebean.page && pagebea.totalPage gt 1>
+                    <#if pagebean.totalPage == pagebean.page && pagebean.totalPage gt 1>
                         <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page-1}">上一页</a></li>
-                        <li><a href="javascript():void(0)">下一页</a></li>
+                        <li><a href="javascript:void(0)">下一页</a></li>
                     </#if>
                 </ul>
             </nav>

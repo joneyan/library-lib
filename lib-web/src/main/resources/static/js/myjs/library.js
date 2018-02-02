@@ -20,3 +20,12 @@ function saveCaseInfo(){
     }
     $("#saveCaseInfo").submit();
 }
+function savePressInfo(){
+    var region=$("#pubname").val();
+    var casename=$("#status").val();
+    if(region==""||casename==""){
+        $("#sp1").html("输入信息不可以为空！").css("color","red");
+        return ;
+    }
+    $("#saveCaseInfo").submit();
+}

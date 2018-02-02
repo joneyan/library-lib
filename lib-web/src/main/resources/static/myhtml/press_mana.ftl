@@ -26,6 +26,9 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid; border-top:1px solid;text-align:center;border-collapse:collapse;}
+    th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}
+    td{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}</style>
 </head>
 <body>
 
@@ -84,12 +87,12 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
-                        <#if managerlog.status==1>
-                            <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
-                        </#if>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                    <#if managerlog.status==1>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                    </#if>
                         <li><a class="" href="stop_mana.html">封禁管理</a></li>
                     </ul>
                 </li>
@@ -153,8 +156,85 @@
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active" style="background-color:lawngreen"><a href="${pagecontext.request.contextpath}/press/getbookepresslist">出版社列表</a></li>
+                <li role="presentation" style="background-color: hotpink"><a href="${pagecontext.request.contextpath}/press_add">新增出版社</a></li>
+            </ul>
+            <form class="form-inline" action="${pagecontext.request.contextpath}/press/getbookepresslist">
+                <label for="pubname">出版社名字：</label>
+                <div class="form-group">
 
+                    <input type="text" class="form-control" id="pubname" name="pubname" value="${pubname}">
+                </div>
+                <label for="status">状态：</label>
+                <div class="form-group">
+                <#assign thevalue=status/>
+                    <select class="form-control" id="status" name="status">
+                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <option value="1" <#if (((thevalue)!'') == '1')>selected="selected"</#if>>可用</option>
+                        <option value="2" <#if (((thevalue)!'') == '2')>selected="selected"</#if>>不可用</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
+                <caption style="color: #18d4cb;font-size: 30px;">出版社列表</caption>
+                <tr>
+                    <th style="text-align: center;">编号</th>
+                    <th style="text-align: center;">出版社名字</th>
+                    <th style="text-align: center;">可用状态</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+            <#list pagebean.pageElements as case>
+                <tr>
+                    <td style="text-align: center;font-size: large;">${case.id}</td>
+                    <td style="text-align: center;font-size: large;">${case.pubname}</td>
+                    <td style="text-align: center;font-size: large;"><#if case.status==2>不可用</#if><#if case.status==1>可用</#if></td>
+                    <td style="text-align: center;font-size: large;">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <#if case.status==1>
+                                <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/press/turnuse?status=2&id=${case.id}'">
+                                    <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;停用</font></span>
+                                </button>
+                            </#if>
+                            <#if case.status==2>
+                                <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/press/turnuse?status=1&id=${case.id}'">
+                                    <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;启用</font></span>
+                                </button>
+                            </#if>
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/press/romovepress?id=${case.id}'">
+                                <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </#list>
+            </table>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li>一共&nbsp;<span>${pagebean.totalNum}</span>&nbsp;条数据&nbsp;&nbsp;
+                        <span>${pagebean.page}</span>/<span>${pagebean.totalPage}</span>业</li>
+                <#if pagebean.totalPage == pagebean.page &&pagebean.page==1>
+                    <li><a href="javascript:void(0)">上一页</a></li>
+                    <li><a href="javascript:void(0)">下一页</a></li>
+                </#if>
+
+                <#if pagebean.totalPage gt pagebean.page && pagebean.page != 1>
+                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page+1}">下一页</a></li>
+                </#if>
+                <#if pagebean.totalPage gt pagebean.page && pagebean.page == 1>
+                    <li><a href="javascript:void(0)">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page+1}">下一页</a></li>
+                </#if>
+
+                <#if pagebean.totalPage == pagebean.page && pagebean.totalPage gt 1>
+                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="javascript:void(0)">下一页</a></li>
+                </#if>
+                </ul>
+            </nav>
 
         </section>      </section>
     <!--main content end-->

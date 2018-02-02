@@ -47,6 +47,13 @@
 <if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
 </if>
 </sql>
+ <sql id="sql_condition_like">
+  <if test="condition != null">
+   <if test="condition.pubname !=null and condition.pubname !=''"> AND pubname like '%${condition.pubname}%'</if>
+   <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+   <if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
+  </if>
+ </sql>
 <sql id="sql_pagination_end">
 <![CDATA[
 limit ${startRow-1},#{limit}
@@ -84,7 +91,7 @@ SELECT
 <include refid="sql_column_list" />
 FROM lib_press
 <trim prefix="WHERE" prefixOverrides="AND">
-<include refid="sql_condition" />
+<include refid="sql_condition_like" />
 </trim>
 <if test="orderBy != null">
 ORDER BY ${orderBy}

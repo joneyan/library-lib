@@ -6,7 +6,8 @@
 
 <result property="password" column="password" />
 <result property="id" column="id" />
-<result property="username" column="username" /></resultMap>
+<result property="username" column="username" />
+ <result property="status" column="status" /></resultMap>
 <sql id="sql_insert_column_list">
 <trim prefix="" prefixOverrides=",">
 
@@ -15,6 +16,7 @@
 <if test="entity.id !=null and entity.id !=''">,id </if>
 
 <if test="entity.username !=null and entity.username !=''">,username </if>
+ <if test="entity.status !=null and entity.status !=''">,status </if>
 </trim>
 </sql>
 <sql id="sql_insert_property_list">
@@ -25,18 +27,21 @@
 <if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
 
 <if test="entity.username !=null and entity.username !=''">,#{entity.username} </if>
+ <if test="entity.status !=null and entity.status !=''">,#{entity.status} </if>
 </trim>
 </sql>
 <sql id="sql_column_list">
 <trim prefix="" prefixOverrides=",">,password
 ,id
 ,username
+ ,status
 </trim></sql>
 <sql id="sql_update_set">
 <trim prefix="SET" prefixOverrides=",">
 <if test="entity != null"><if test="entity.password !=null and entity.password !=''">,password = #{entity.password}</if>
 <if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
 <if test="entity.username !=null and entity.username !=''">,username = #{entity.username}</if>
+ <if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
 </if>
 </trim>
 </sql>
@@ -45,8 +50,17 @@
 <if test="condition.password !=null and condition.password !=''"> AND password = #{condition.password}</if>
 <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
 <if test="condition.username !=null and condition.username !=''"> AND username = #{condition.username}</if>
+<if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
 </if>
 </sql>
+ <sql id="sql_condition_like">
+  <if test="condition != null">
+   <if test="condition.password !=null and condition.password !=''"> AND password = #{condition.password}</if>
+   <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
+   <if test="condition.username !=null and condition.username !=''"> AND username like '%${condition.username}%'</if>
+   <if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
+  </if>
+ </sql>
 <sql id="sql_pagination_end">
 <![CDATA[
 limit ${startRow-1},#{limit}
@@ -56,6 +70,7 @@ limit ${startRow-1},#{limit}
 <if test="_parameter_containsKey('entity.password')">,password = #{entity.password}</if>
 <if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
 <if test="_parameter_containsKey('entity.username')">,username = #{entity.username}</if>
+<if test="_parameter_containsKey('entity.status')">,status = #{entity.status}</if>
 </trim>
 </sql>
 <insert id="insert" parameterType="java.util.Map">
@@ -84,7 +99,7 @@ SELECT
 <include refid="sql_column_list" />
 FROM lib_manager
 <trim prefix="WHERE" prefixOverrides="AND">
-<include refid="sql_condition" />
+<include refid="sql_condition_like" />
 </trim>
 <if test="orderBy != null">
 ORDER BY ${orderBy}

@@ -37,6 +37,8 @@ public class BookCaseController {
     @RequestMapping("/getbookecaselist")
     public String getBookCaselist(HttpServletRequest request,
                                   Model model,
+                                  @RequestParam(required = false) String username,
+                                  @RequestParam(required = false) Integer status,
                                   @RequestParam(required = false,defaultValue = "1") Integer page,
                                   @RequestParam(required = false,defaultValue = "10") Integer pagesize){
         List<LibBookcase> libBookcases = libBookcaseService.find(pagesize, page);
@@ -88,6 +90,25 @@ public class BookCaseController {
             }*/
         }else{
             model.addAttribute("message","传入参数不能为空，添加失败");
+        }
+        model.addAttribute("tourl","http://10.0.9.193:8088/bookcase/getbookecaselist");
+        return "messager";
+    }
+
+    /**
+     * 删除书架
+     * @param request
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("/romovebookcase")
+    public String romovebookcase(HttpServletRequest request,Model model,Integer id){
+        int remove = libBookcaseService.remove(id + "");
+        if(remove>0){
+            model.addAttribute("message","删除成功！");
+        }else{
+            model.addAttribute("message","删除失败！");
         }
         model.addAttribute("tourl","http://10.0.9.193:8088/bookcase/getbookecaselist");
         return "messager";

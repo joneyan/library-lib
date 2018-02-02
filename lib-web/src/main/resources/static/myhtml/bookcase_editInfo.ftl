@@ -26,6 +26,7 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid;text-align:center;border-collapse:collapse;}th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;}</style>
 </head>
 <body>
 
@@ -84,8 +85,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
                         <#if managerlog.status==1>
                             <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
@@ -153,7 +154,37 @@
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" style="background-image: url('${pagecontext.request.contextpath}/img/tsg2.jpg');height: 800px;">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="" style="background-color:lawngreen"><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架列表</a></li>
+                <li role="presentation" class="active" style="background-color: hotpink"><a href="javascript:void(0)">新增书架</a></li>
+            </ul>
+            <span style="text-align: center;color: red" id="sp1">${message}</span>
+            <form id="saveCaseInfo" action="${pagecontext.request.getcontextpath}/bookcase/saveInfo" method="post">
+
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;图书区域：</span></span>
+                    <select class="form-control" id="region" name="region">
+                        <option value="">--请选择--</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-info-sign" aria-hidden="true">&nbsp;架&nbsp;&nbsp;名：</span></span>
+                    <input type="text" name="casename" id="casename" class="form-control"
+                           value="${case.casename}"  aria-describedby="basic-addon1">
+                </div>
+
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="saveCaseInfo()">
+                        <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;提交</font></span>
+                    </button>
+                </div>
+            </form>
 
 
         </section>      </section>
@@ -171,6 +202,7 @@
 <!--script for this page-->
 <script src="//10.0.9.193:8088/js/sparkline-chart.js"></script>
 <script src="//10.0.9.193:8088/js/easy-pie-chart.js"></script>
+<script src="//10.0.9.193:8088/js/myjs/library.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
