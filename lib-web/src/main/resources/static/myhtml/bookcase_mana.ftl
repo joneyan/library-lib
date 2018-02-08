@@ -92,7 +92,7 @@
                         <#if managerlog.status==1>
                             <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
                         </#if>
-                        <li><a class="" href="stop_mana.html">封禁管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

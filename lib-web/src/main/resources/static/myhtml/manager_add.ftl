@@ -26,6 +26,9 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid; border-top:1px solid;text-align:center;border-collapse:collapse;}
+    th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}
+    td{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}</style>
 </head>
 <body>
 
@@ -72,7 +75,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="">
-                    <a class="" href="index.html">
+                    <a class="" href="${pagecontext.request.getcontextpath}/index">
                         <i class="icon-dashboard"></i>
                         <span>首页</span>
                     </a>
@@ -84,12 +87,12 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
-                        <#if managerlog.status==1>
-                            <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
-                        </#if>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                    <#if managerlog.status==1>
+                        <li class="active"><a href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                    </#if>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
@@ -152,11 +155,30 @@
         </div>
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
-    <section id="main-content" style="background-image: url('${pagecontext.request.contextpath}/img/tsg2.jpg')">
-        <section class="wrapper" style="height:700px;">
-            <div class="alert alert-success" style="margin: 0 auto;width: 600px;height: 50px;font-size: larger;" role="alert" >${message}将在<span id="autos" style="font-size: large;color: red">5</span>秒后返回!如未跳转请
-                <a href="${tourl}">点击跳转</a></div>
-<input type="hidden" id="tourl" value="${tourl}">
+    <section id="main-content">
+        <section class="wrapper" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active" ><a href="${pagecontext.request.contextpath}/manager/getbookemanagerlist">管理员列表</a></li>
+                <li role="presentation"><a href="${pagecontext.request.contextpath}/manager_add">新增管理员</a></li>
+            </ul>
+            <form class="form-inline" action="${pagecontext.request.contextpath}/manager/savemanager">
+                <label for="pubname">管理员名字：</label>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" id="username" name="username" value="${username}">
+                </div>
+                <label for="status">状态：</label>
+                <div class="form-group">
+                <#assign thevalue=status/>
+                    <select class="form-control" id="status" name="status">
+                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <option value="1" <#if (((thevalue)!'') == '1')>selected="selected"</#if>>超级管理员</option>
+                        <option value="2" <#if (((thevalue)!'') == '2')>selected="selected"</#if>>管理员</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">添加</button>
+            </form>
+
         </section>      </section>
     <!--main content end-->
 </section>
@@ -172,7 +194,6 @@
 <!--script for this page-->
 <script src="//10.0.9.193:8088/js/sparkline-chart.js"></script>
 <script src="//10.0.9.193:8088/js/easy-pie-chart.js"></script>
-<script src="//10.0.9.193:8088/js/myjs/common.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {

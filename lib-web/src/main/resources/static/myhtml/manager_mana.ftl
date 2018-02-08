@@ -89,11 +89,11 @@
                     <ul class="sub">
                         <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
                     <#if managerlog.status==1>
                         <li class="active"><a href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
                     </#if>
-                        <li><a class="" href="stop_mana.html">封禁管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

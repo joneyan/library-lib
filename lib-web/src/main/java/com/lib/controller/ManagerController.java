@@ -73,7 +73,58 @@ public class ManagerController {
             int update = libManagerService.update(libManager, id + "");
             model.addAttribute("message","重置成功，新密码为'111111'!请登录后修改");
         }else{
-            model.addAttribute("message","充值失败!确认选中用户");
+            model.addAttribute("message","重置失败!确认选中用户");
+        }
+        model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
+        return "messager";
+    }
+
+    /**
+     * 移除管理员
+     * @param request
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("/removemanager")
+    public String removeManager(HttpServletRequest request,Model model ,Integer id){
+        if(id!=null){
+            int remove = libManagerService.remove(id + "");
+            if(remove>0){
+                model.addAttribute("message","已经成功删除！");
+            }
+
+        }else{
+            model.addAttribute("message","删除失败!确认选中用户");
+        }
+        model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
+        return "messager";
+    }
+
+    /**
+     * 添加用户
+     */
+    @RequestMapping("savemanager")
+    public String saveManger(HttpServletRequest request,Model model,String username,Integer status){
+        if(username!=null&&status!=null){
+            LibManagerVO libManagerVO = new LibManagerVO();
+            libManagerVO.setUsername(username);
+            libManagerVO.setStatus(status);
+            List<LibManager> libManagers = libManagerService.find(libManagerVO);
+            if(libManagers.size()>0){
+                model.addAttribute("message","添加失败已经存在此管理员！");
+                model.addAttribute("tourl","http://10.0.9.193:8088/manager_add");
+                return "messager";
+            }
+            LibManager libManager = new LibManager();
+            libManager.setUsername(username);
+            libManager.setStatus(status);
+            libManager.setPassword("111111");
+            libManagerService.insert(libManager);
+            model.addAttribute("message","添加成功！默认密码为111111");
+
+        }else{
+            model.addAttribute("message","添加失败!确认填入数据！");
         }
         model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
         return "messager";
