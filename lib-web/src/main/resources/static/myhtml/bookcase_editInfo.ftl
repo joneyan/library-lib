@@ -101,8 +101,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="reader_list.html">所有读者</a></li>
-                        <li><a class="" href="reader_add.html">新增管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
                         <li><a class="" href="readertype_mana.html">读者类型管理</a></li>
                     </ul>
                 </li>

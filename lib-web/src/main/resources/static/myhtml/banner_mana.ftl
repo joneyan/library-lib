@@ -103,8 +103,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="reader_list.html">所有读者</a></li>
-                        <li><a class="" href="reader_add.html">新增管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
                         <li><a class="" href="readertype_mana.html">读者类型管理</a></li>
                     </ul>
                 </li>
@@ -161,7 +161,7 @@
                 <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist">封禁列表</a></li>
                 <li role="presentation"><a href="${pagecontext.request.contextpath}/user/getbookwillbanneruserlist">可禁人员</a></li>
             </ul>
-            <form class="form-inline" action="${pagecontext.request.contextpath}/manager/getbookemanagerlist">
+            <form class="form-inline" action="${pagecontext.request.contextpath}/user/getbookbanneruserlist">
                 <input type="hidden" name="isBanner" value="1">
                 <label for="readername">读者名字：</label>
                 <div class="form-group">
@@ -184,11 +184,11 @@
                 <div class="form-group">
 
                 <#assign thevalue=typeid/>
-                    <select class="form-control" id="typeid" name="typeid" >
+                    <select class="form-control" id="typeid" name="typeid">
 
-                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
                     <#list types as type>
-                        <option value="${type.id}" <#if (((thevalue)!'') == '${type.id}')>selected="selected"</#if>>${type.rolename}</option>
+                        <option   value="${type.id}" <#if (((thevalue)!'') == '${type.id}')>selected="selected"</#if>>${type.rolename}</option>
                     </#list>
                     </select>
                 </div>
@@ -281,6 +281,7 @@
 <!--script for this page-->
 <script src="//10.0.9.193:8088/js/sparkline-chart.js"></script>
 <script src="//10.0.9.193:8088/js/easy-pie-chart.js"></script>
+<script src="//10.0.9.193:8088/js/myjs/selectjs.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {

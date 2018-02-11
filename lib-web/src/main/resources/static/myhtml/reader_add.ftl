@@ -26,6 +26,9 @@
     <script src="//10.0.9.193:8088/js/jquery.js"></script>
     <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
     <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid; border-top:1px solid;text-align:center;border-collapse:collapse;}
+    th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}
+    td{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}</style>
 </head>
 <body>
 
@@ -77,32 +80,32 @@
                         <span>首页</span>
                     </a>
                 </li>
-                <li class="sub-menu active">
+                <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon-book"></i>
                         <span>系统设置</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
-                        <#if managerlog.status==1>
-                            <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
-                        </#if>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                    <#if managerlog.status==1>
+                        <li class=""><a href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                    </#if>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a href="javascript:;" class="">
                         <i class="icon-cogs"></i>
                         <span>读者管理</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
-                        <li><a class="" href="readertype_mana.html">读者类型管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
+                        <li class="active"><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
+                        <li class=""><a class="" href="readertype_mana.html">读者类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -153,7 +156,67 @@
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="" ><a href="${pagecontext.request.getcontextpath}/user/getReaderList">读者列表</a></li>
+                <li role="presentation" class="active"><a href="${pagecontext.request.contextpath}/reader_add">新增读者</a></li>
+            </ul>
+            <div style="margin: 0 auto; width: 400px;border-radius: 10px;border: 1 solid red;background-color: burlywood">
+                <h1 style="margin: 0 auto;width: 300px;color: #01a7b3">新增读者</h1>
+                <hr/>
+                <form class="form-inline" action="${pagecontext.request.getcontextpath}/user/getReaderList">
+                    <input type="hidden" name="isBanner" value="1">
+                    &nbsp;&nbsp;&nbsp;<label for="readername">读者的名字：</label>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" id="readername" name="name" value="${reader.name}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="barcode">读者条形码：</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="barcode" name="barcode" value="${reader.barcode}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="papernum">读者身份证：</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="status">读者的类型：</label>
+                    <div class="form-group">
+
+                    <#assign thevalue=typeid/>
+                        <select class="form-control" id="typeid" name="typeid">
+
+                            <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <#list types as type>
+                            <option   value="${type.id}" <#if (((thevalue)!'') == '${type.id}')>selected="selected"</#if>>${type.rolename}</option>
+                        </#list>
+                        </select>
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="readername">读者的职业：</label>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" id="vocation" name="vocation" value="${reader.vocation}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label>读者的性别：</label>
+                    <div class="form-group">
+                        <select class="form-control" id="sex" name="sex">
+
+                            <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                            <option   value="1" <#if (((thevalue)!'') == '1')>selected="selected"</#if>>男</option>
+                            <option   value="2" <#if (((thevalue)!'') == '2')>selected="selected"</#if>>女</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-default" style="margin: 0 auto;">
+                        <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;添加用户</font></span>
+                    </button>
+                </form>
+            </div>
+            <hr/>
 
 
         </section>      </section>
@@ -171,6 +234,8 @@
 <!--script for this page-->
 <script src="//10.0.9.193:8088/js/sparkline-chart.js"></script>
 <script src="//10.0.9.193:8088/js/easy-pie-chart.js"></script>
+<script src="//10.0.9.193:8088/js/myjs/selectjs.js"></script>
+<script src="//10.0.9.193:8088/js/myjs/date.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
