@@ -9,23 +9,23 @@
     <link rel="shortcut icon" href="img/favicon.html">
     <title>图书馆信息</title>
     <!-- Bootstrap core CSS -->
-    <link href="//10.0.9.193:8088/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//10.0.9.193:8088/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${pagecontext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pagecontext.request.contextPath}/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="//10.0.9.193:8088/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="//10.0.9.193:8088/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="//10.0.9.193:8088/css/owl.carousel.css" type="text/css">
+    <link href="${pagecontext.request.contextPath}/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${pagecontext.request.contextPath}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="${pagecontext.request.contextPath}/css/owl.carousel.css" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="//10.0.9.193:8088/css/style.css" rel="stylesheet">
-    <link href="//10.0.9.193:8088/css/style-responsive.css" rel="stylesheet" />
+    <link href="${pagecontext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pagecontext.request.contextPath}/css/style-responsive.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="//10.0.9.193:8088/js/html5shiv.js"></script>
-    <script src="//10.0.9.193:8088/js/respond.min.js"></script>
+    <script src="${pagecontext.request.contextPath}/js/html5shiv.js"></script>
+    <script src="${pagecontext.request.contextPath}/js/respond.min.js"></script>
     <![endif]-->
-    <script src="//10.0.9.193:8088/js/jquery.js"></script>
-    <script src="//10.0.9.193:8088/js/jquery-1.8.3.min.js"></script>
-    <script src="//10.0.9.193:8088/js/bootstrap.min.js"></script>
+    <script src="${pagecontext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pagecontext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
+    <script src="${pagecontext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -171,17 +171,17 @@
     <!--main content end-->
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="//10.0.9.193:8088/js/jquery.scrollTo.min.js"></script>
-<script src="//10.0.9.193:8088/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="//10.0.9.193:8088/js/jquery.sparkline.js" type="text/javascript"></script>
-<script src="//10.0.9.193:8088/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-<script src="//10.0.9.193:8088/js/owl.carousel.js" ></script>
-<script src="//10.0.9.193:8088/js/jquery.customSelect.min.js" ></script>
+<script src="${pagecontext.request.contextPath}/js/jquery.scrollTo.min.js"></script>
+<script src="${pagecontext.request.contextPath}/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="${pagecontext.request.contextPath}/js/jquery.sparkline.js" type="text/javascript"></script>
+<script src="${pagecontext.request.contextPath}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="${pagecontext.request.contextPath}/js/owl.carousel.js" ></script>
+<script src="${pagecontext.request.contextPath}/js/jquery.customSelect.min.js" ></script>
 <!--common script for all pages-->
-<script src="//10.0.9.193:8088/js/common-scripts.js"></script>
+<script src="${pagecontext.request.contextPath}/js/common-scripts.js"></script>
 <!--script for this page-->
-<script src="//10.0.9.193:8088/js/sparkline-chart.js"></script>
-<script src="//10.0.9.193:8088/js/easy-pie-chart.js"></script>
+<script src="${pagecontext.request.contextPath}/js/sparkline-chart.js"></script>
+<script src="${pagecontext.request.contextPath}/js/easy-pie-chart.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
