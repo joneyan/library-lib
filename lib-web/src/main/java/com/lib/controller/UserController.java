@@ -45,8 +45,8 @@ public class UserController {
                                         @RequestParam(required = false,defaultValue = "10") Integer pagesize){
         LibReaderVO libReaderVO = new LibReaderVO();
         dealSearch(isBanner,name,operator,typeid,vocation,sex,libReaderVO);
-        List<LibReaderVO> libReaders = libReaderService.findBannerReader(libReaderVO, pagesize, page);
-        int totalNum=libReaderService.countCutoms(libReaderVO);
+        List<LibReaderVO> libReaders = libReaderService.findBannerReader(libReaderVO, pagesize, page,null,null);
+        int totalNum=libReaderService.countCutoms(libReaderVO,null,null);
         PageBean<LibReaderVO> libReaderVOPageBean = new PageBean<>();
         libReaderVOPageBean.setPageElements(libReaders);
         libReaderVOPageBean.setPagesize(pagesize);
@@ -77,12 +77,12 @@ public class UserController {
                                 @RequestParam(required = false) String sex,
                                 @RequestParam(required = false,defaultValue = "1") Integer page,
                                 @RequestParam(required = false,defaultValue = "10") Integer pagesize,
-                                @RequestParam(required = false) Date startTime,
-                                @RequestParam(required = false) Date endTime){
+                                @RequestParam(required = false) String startTime,
+                                @RequestParam(required = false) String endTime){
         LibReaderVO libReaderVO = new LibReaderVO();
         dealSearch(isBanner,name,operator,typeid,vocation,sex,libReaderVO);
-        List<LibReaderVO> libReaders = libReaderService.findBannerReader(libReaderVO, pagesize, page);
-        int totalNum=libReaderService.countCutoms(libReaderVO);
+        List<LibReaderVO> libReaders = libReaderService.findBannerReader(libReaderVO, pagesize, page,startTime,endTime);
+        int totalNum=libReaderService.countCutoms(libReaderVO,startTime,endTime);
         PageBean<LibReaderVO> libReaderVOPageBean = new PageBean<>();
         libReaderVOPageBean.setPageElements(libReaders);
         libReaderVOPageBean.setPagesize(pagesize);

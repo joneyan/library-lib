@@ -14,7 +14,7 @@ public interface LibReaderDAO extends DAO<LibReader, LibReaderVO, String>{
      * @param page
      * @return
      */
-    List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page);
+    List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page,String startTime,String endTime);
 
-    int countCutoms(LibReaderVO libReaderVO);
+    int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime);
 }

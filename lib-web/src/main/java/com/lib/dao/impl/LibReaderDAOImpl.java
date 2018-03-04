@@ -25,18 +25,22 @@ return "libReaderDao";
 }
 
     @Override
-    public List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page) {
+    public List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page,String startTime,String endTime) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("condition",libReaderVO);
         map.put("start",pagesize*(page-1));
         map.put("end",pagesize);
+        map.put("startTime",startTime);
+        map.put("endTime",endTime);
         return sqlSessionTemplate.selectList(getNamespace()+"_EXT.findBannerReader",map);
     }
 
     @Override
-    public int countCutoms(LibReaderVO libReaderVO) {
+    public int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("condition",libReaderVO);
+        map.put("startTime",startTime);
+        map.put("endTime",endTime);
         return sqlSessionTemplate.selectList(getNamespace()+"_EXT.countCutoms",map).size();
     }
 }

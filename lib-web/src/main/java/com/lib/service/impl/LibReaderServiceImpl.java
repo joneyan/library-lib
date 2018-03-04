@@ -24,12 +24,12 @@ return libReaderDAO;
 }
 
     @Override
-    public List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page) {
-        return libReaderDAO.findBannerReader(libReaderVO,pagesize,page);
+    public List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page,String startTime,String endTime) {
+        return libReaderDAO.findBannerReader(libReaderVO,pagesize,page,startTime,endTime);
     }
 
     @Override
-    public int countCutoms(LibReaderVO libReaderVO) {
-        return libReaderDAO.countCutoms(libReaderVO);
+    public int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime) {
+        return libReaderDAO.countCutoms(libReaderVO,startTime,endTime);
     }
 }
