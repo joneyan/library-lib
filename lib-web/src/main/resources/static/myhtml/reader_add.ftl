@@ -164,7 +164,7 @@
             <div style="margin: 0 auto; width: 400px;border-radius: 10px;border: 1 solid red;background-color: burlywood">
                 <h1 style="margin: 0 auto;width: 300px;color: #01a7b3">新增读者</h1>
                 <hr/>
-                <form class="form-inline" action="${pagecontext.request.getcontextpath}/user/getReaderList">
+                <form method="post" class="form-inline" action="${pagecontext.request.getcontextpath}/user/adduser" onsubmit="return formValidate()">
                     <input type="hidden" name="isBanner" value="1">
                     &nbsp;&nbsp;&nbsp;<label for="readername">读者的名字：</label>
                     <div class="form-group">
@@ -180,6 +180,16 @@
                     &nbsp;&nbsp;&nbsp;<label for="papernum">读者身份证：</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="papernum">读者的邮箱：</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="readermail" name="readermail" value="${reader.papernum}">
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;<label for="papernum">读者的手机：</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="readertel" name="readertel" value="${reader.papernum}">
                     </div>
                     <br/>
                     &nbsp;&nbsp;&nbsp;<label for="status">读者的类型：</label>
@@ -252,6 +262,17 @@
     $(function(){
         $('select.styled').customSelect();
     });
+
+    //表单校验
+    function formValidate(){
+        var readername=$('#readername').val();
+        var barcode=$('#barcode').val();
+        var papernum=$('#papernum').val();
+        var papernum=$('#papernum').val();
+        var typeid=$('#typeid').val();
+        var vocation=$('#vocation').val();
+        var sex=$('#sex').val();
+    }
 
 </script>
 

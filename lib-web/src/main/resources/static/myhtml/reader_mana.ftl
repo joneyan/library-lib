@@ -162,7 +162,7 @@
                 <li role="presentation"><a href="${pagecontext.request.contextpath}/reader_add">新增读者</a></li>
             </ul>
             <form class="form-inline" action="${pagecontext.request.getcontextpath}/user/getReaderList">
-                <input type="hidden" name="isBanner" value="1">
+
                 <label for="readername">读者名字：</label>
                 <div class="form-group">
 
@@ -178,7 +178,7 @@
                 </div>
                 &nbsp;&nbsp;&nbsp;<label for="status">最近操作管理：</label>
                 <div class="form-group">
-                <#assign thevalue=operator/>
+                <#assign thevalue=reader.operator/>
                     <select class="form-control" id="operator" name="operator">
 
                         <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
@@ -191,7 +191,7 @@
                 &nbsp;&nbsp;&nbsp;<label for="status">读者类型：</label>
                 <div class="form-group">
 
-                <#assign thevalue=typeid/>
+                <#assign thevalue=reader.typeid/>
                     <select class="form-control" id="typeid" name="typeid">
 
                         <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
@@ -207,21 +207,22 @@
                 </div>
                 &nbsp;&nbsp;&nbsp;<label>注册时间:</label>
                 <div class="form-group">
-                    <input readonly="readonly" name="startTime" id="startTime" class="form-control" type="text" value="${(startTime?string('yyyy-MM-dd'))!''}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
+                    <input readonly="readonly" name="startTime" id="startTime" class="form-control" type="text" value="${startTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
                 </div>
                 <a href="javascript:var n = document.getElementById('startTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
                 &nbsp;&nbsp;&nbsp;<label>到:</label>
                 <div class="form-group">
-                    <input readonly="readonly" name="endTime" id="endTime" class="form-control" type="text" value="${(endTime?string('yyyy-MM-dd'))!''}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
+                    <input readonly="readonly" name="endTime" id="endTime" class="form-control" type="text" value="${endTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
                 </div>
                 <a href="javascript:var n = document.getElementById('endTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
                 &nbsp;&nbsp;&nbsp;<label>性别：</label>
+            <#assign thevalue2=reader.sex/>
                 <div class="form-group">
                     <select class="form-control" id="sex" name="sex">
 
-                        <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                        <option   value="1" <#if (((thevalue)!'') == '1')>selected="selected"</#if>>男</option>
-                        <option   value="2" <#if (((thevalue)!'') == '2')>selected="selected"</#if>>女</option>
+                        <option  value="-1" <#if (((thevalue2)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <option   value="1" <#if (((thevalue2)!'') == '1')>selected="selected"</#if>>男</option>
+                        <option   value="2" <#if (((thevalue2)!'') == '2')>selected="selected"</#if>>女</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
@@ -234,35 +235,36 @@
                     <th style="text-align: center;">名字</th>
                     <th style="text-align: center;">封禁日期</th>
                     <th style="text-align: center;">读者条形码</th>
-                    <th style="text-align: center;">读者生日</th>
                     <th style="text-align: center;">创建日期</th>
                     <th style="text-align: center;">证件号码</th>
-                    <th style="text-align: center;">证件类型</th>
                     <th style="text-align: center;">联系电话</th>
-                    <th style="text-align: center;">备注</th>
                     <th style="text-align: center;">性别</th>
                     <th style="text-align: center;">读者类型</th>
                     <th style="text-align: center;">读者职业</th>
+                    <th style="text-align: center;">最近操作</th>
                     <th style="text-align: center;">操作</th>
                 </tr>
             <#list pagebean.pageElements as case>
+                <input type="hidden" id="readerid" name="readerid" value="${case.id}">
                 <tr>
                     <td style="text-align: center;font-size: large;">${case.id}</td>
                     <td style="text-align: center;font-size: large;">${case.name}</td>
                     <td style="text-align: center;font-size: large;">${case.bannertime}</td>
                     <td style="text-align: center;font-size: large;">${case.barcode}</td>
-                    <td style="text-align: center;font-size: large;">${case.birthday}</td>
-                    <td style="text-align: center;font-size: large;">${case.createdate}</td>
+                    <td style="text-align: center;font-size: large;">${case.createdate?string("yyyy-MM-dd")}</td>
                     <td style="text-align: center;font-size: large;">${case.papernum}</td>
-                    <td style="text-align: center;font-size: large;">${case.papertype}</td>
                     <td style="text-align: center;font-size: large;">${case.readertel}</td>
-                    <td style="text-align: center;font-size: large;">${case.remark}</td>
                     <td style="text-align: center;font-size: large;">${case.gender}</td>
                     <td style="text-align: center;font-size: large;">${case.readerType}</td>
+                    <td style="text-align: center;font-size: large;">${case.vocation}</td>
+                    <td style="text-align: center;font-size: large;">${case.operator}</td>
                     <td style="text-align: center;font-size: large;">
                         <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/user/resetManner?&id=${case.id}'">
-                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;解除封禁</font></span>
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="openEditPage()">
+                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
+                            </button>
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/romovebookcase?id=${case.id}'">
+                                <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
                             </button>
                         </div>
                     </td>
@@ -311,6 +313,7 @@
 <script src="${pagecontext.request.contextPath}/js/easy-pie-chart.js"></script>
 <script src="${pagecontext.request.contextPath}/js/myjs/selectjs.js"></script>
 <script src="${pagecontext.request.contextPath}/js/myjs/date.js"></script>
+<script src="${pagecontext.request.contextPath}/js/layer/layer.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
@@ -327,6 +330,20 @@
     $(function(){
         $('select.styled').customSelect();
     });
+    //打开一个修改页面弹窗
+    function openEditPage(){
+        var readerid=$("#readerid").val();
+        var url='${pagecontext.request.contextpath}/user/geteditreader?id='+readerid;
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['800px', '500px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    }
 
 </script>
 
