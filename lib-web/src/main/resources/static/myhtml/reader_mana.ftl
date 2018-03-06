@@ -104,8 +104,8 @@
                     </a>
                     <ul class="sub">
                         <li class="active"><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
-                        <li class=""><a class="" href="readertype_mana.html">读者类型管理</a></li>
+                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
+                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -159,7 +159,7 @@
         <section class="wrapper" >
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/user/getReaderList">读者列表</a></li>
-                <li role="presentation"><a href="${pagecontext.request.contextpath}/reader_add">新增读者</a></li>
+                <li role="presentation"><a href="${pagecontext.request.contextpath}/user/toaddpage">新增读者</a></li>
             </ul>
             <form class="form-inline" action="${pagecontext.request.getcontextpath}/user/getReaderList">
 
@@ -254,16 +254,22 @@
                     <td style="text-align: center;font-size: large;">${case.createdate?string("yyyy-MM-dd")}</td>
                     <td style="text-align: center;font-size: large;">${case.papernum}</td>
                     <td style="text-align: center;font-size: large;">${case.readertel}</td>
-                    <td style="text-align: center;font-size: large;">${case.gender}</td>
+                    <#if case.sex=='1'>
+                        <td style="text-align: center;font-size: large;">男</td>
+                    </#if>
+                    <#if case.sex=='2'>
+                        <td style="text-align: center;font-size: large;">女</td>
+                    </#if>
+
                     <td style="text-align: center;font-size: large;">${case.readerType}</td>
                     <td style="text-align: center;font-size: large;">${case.vocation}</td>
-                    <td style="text-align: center;font-size: large;">${case.operator}</td>
+                    <td style="text-align: center;font-size: large;">${case.domanager}</td>
                     <td style="text-align: center;font-size: large;">
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="openEditPage()">
                                 <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
                             </button>
-                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/bookcase/romovebookcase?id=${case.id}'">
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/user/removereader?id=${case.id}'">
                                 <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
                             </button>
                         </div>

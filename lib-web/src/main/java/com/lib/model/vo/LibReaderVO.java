@@ -6,6 +6,15 @@ public class LibReaderVO extends LibReader{
     private Integer isBanner; //是否是查询禁用名单
     private String readerType; //读者类型
     private String gender; //性别
+    private String domanager; //最近操作者名字
+
+    public String getDomanager() {
+        return domanager;
+    }
+
+    public void setDomanager(String domanager) {
+        this.domanager = domanager;
+    }
 
     public Integer getIsBanner() {
         return isBanner;

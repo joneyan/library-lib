@@ -70,7 +70,7 @@ public class BookCaseController {
             List<LibBookcase> libBookcases = libBookcaseService.find(libBookcaseVO);
             if(libBookcases.size()>0){
                 model.addAttribute("message","添加失败，已经拥有这个书架！");
-                model.addAttribute("tourl","http://10.0.9.193:8088/bookcase/getbookecaselist");
+                model.addAttribute("tourl","/bookcase/getbookecaselist");
                 return "messager";
             }
             LibBookcase libBookcase = new LibBookcase();
@@ -91,7 +91,7 @@ public class BookCaseController {
         }else{
             model.addAttribute("message","传入参数不能为空，添加失败");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/bookcase/getbookecaselist");
+        model.addAttribute("tourl","/bookcase/getbookecaselist");
         return "messager";
     }
 
@@ -110,7 +110,7 @@ public class BookCaseController {
         }else{
             model.addAttribute("message","删除失败！");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/bookcase/getbookecaselist");
+        model.addAttribute("tourl","/bookcase/getbookecaselist");
         return "messager";
     }
 

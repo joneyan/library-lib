@@ -2,7 +2,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="libReadertypeDao_EXT">
-<resultMap id="libReadertype" type="com.lib.model.LibReadertype">
+<resultMap id="libReadertypeVo" type="com.lib.model.vo.LibReadertypeVO">
 
 <result property="brownum" column="brownum" />
 <result property="rolename" column="rolename" />
@@ -30,7 +30,7 @@
 <sql id="sql_column_list">
 brownum,
 rolename,
-id,
+id
 </sql>
 <sql id="sql_update_set">
 <trim prefix="SET" prefixOverrides=",">
@@ -42,11 +42,8 @@ id,
 </sql>
 <sql id="sql_condition">
 <if test="condition != null">
-<if test="entity.brownum !=null and entity.brownum !=''">,brownum = #{entity.brownum}</if>
 <if test="condition.brownum !=null and condition.brownum !=''"> AND brownum = #{condition.brownum}</if>
-<if test="entity.rolename !=null and entity.rolename !=''">,rolename = #{entity.rolename}</if>
 <if test="condition.rolename !=null and condition.rolename !=''"> AND rolename = #{condition.rolename}</if>
-<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
 <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
 </if>
 </sql>
@@ -61,4 +58,14 @@ limit ${startRow-1},#{limit}
 <if test="_parameter_containsKey('entity.id')">,id = #{entity.id}</if>
 </trim>
 </sql>
+    <select id="getPeopleNumList" parameterType="java.util.Map" resultMap="libReadertypeVo">
+        SELECT
+        <include refid="sql_column_list"/>
+        ,tpd.peoplenum AS peoplenum
+        FROM lib_readertype lbrt
+        LEFT JOIN (
+        SELECT typeid,count(*) AS peoplenum FROM  lib_reader GROUP BY typeid
+        ) tpd ON tpd.typeid=lbrt.id
+
+    </select>
 </mapper>

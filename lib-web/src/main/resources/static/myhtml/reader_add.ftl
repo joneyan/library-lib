@@ -104,8 +104,8 @@
                     </a>
                     <ul class="sub">
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li class="active"><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
-                        <li class=""><a class="" href="readertype_mana.html">读者类型管理</a></li>
+                        <li class="active"><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
+                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -159,7 +159,7 @@
         <section class="wrapper" >
             <ul class="nav nav-tabs">
                 <li role="presentation" class="" ><a href="${pagecontext.request.getcontextpath}/user/getReaderList">读者列表</a></li>
-                <li role="presentation" class="active"><a href="${pagecontext.request.contextpath}/reader_add">新增读者</a></li>
+                <li role="presentation" class="active"><a href="${pagecontext.request.contextpath}/user/toaddpage">新增读者</a></li>
             </ul>
             <div style="margin: 0 auto; width: 400px;border-radius: 10px;border: 1 solid red;background-color: burlywood">
                 <h1 style="margin: 0 auto;width: 300px;color: #01a7b3">新增读者</h1>
@@ -179,12 +179,12 @@
                     <br/>
                     &nbsp;&nbsp;&nbsp;<label for="papernum">读者身份证：</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}">
+                        <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.readertel}">
                     </div>
                     <br/>
                     &nbsp;&nbsp;&nbsp;<label for="papernum">读者的邮箱：</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="readermail" name="readermail" value="${reader.papernum}">
+                        <input type="text" class="form-control" id="readermail" name="readermail" value="${reader.readermail}">
                     </div>
                     <br/>
                     &nbsp;&nbsp;&nbsp;<label for="papernum">读者的手机：</label>

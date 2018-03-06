@@ -21,38 +21,37 @@
     <div style="margin: 0 auto; width: 400px;border-radius: 10px;border: 1 solid red;background-color: burlywood">
         <h1 style="margin: 0 auto;width: 300px;color: #01a7b3">新增读者</h1>
         <hr/>
-        <form method="post" class="form-inline" action="${pagecontext.request.getcontextpath}/user/edituser" onsubmit="return formValidate()">
-            <input type="hidden" name="isBanner" value="1">
+        <form id="myform" method="post" class="form-inline" action="${pagecontext.request.getcontextpath}/user/edituser" onsubmit="return formValidate()">
             &nbsp;&nbsp;&nbsp;<label for="readername">读者的名字：</label>
             <div class="form-group">
 
-                <input type="text" class="form-control" id="readername" name="name" value="${reader.name}">
+                <input type="text" class="form-control" id="readername" name="name" value="${reader.name}" readonly="readonly">
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label for="barcode">读者条形码：</label>
             <div class="form-group">
-                <input type="text" class="form-control" id="barcode" name="barcode" value="${reader.barcode}">
+                <input type="text" class="form-control" id="barcode" name="barcode" value="${reader.barcode}" readonly="readonly">
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label for="papernum">读者身份证：</label>
             <div class="form-group">
-                <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}">
+                <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}" readonly="readonly">
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label for="papernum">读者的邮箱：</label>
             <div class="form-group">
-                <input type="text" class="form-control" id="readermail" name="readermail" value="${reader.papernum}">
+                <input type="text" class="form-control" id="readermail" name="readermail" value="${reader.readermail}">
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label for="papernum">读者的手机：</label>
             <div class="form-group">
-                <input type="text" class="form-control" id="readertel" name="readertel" value="${reader.papernum}">
+                <input type="text" class="form-control" id="readertel" name="readertel" value="${reader.readertel}">
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label for="status">读者的类型：</label>
             <div class="form-group">
 
-                <#assign thevalue=typeid/>
+                <#assign thevalue=reader.typeid/>
                 <select class="form-control" id="typeid" name="typeid">
 
                     <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
@@ -69,6 +68,7 @@
             </div>
             <br/>
             &nbsp;&nbsp;&nbsp;<label>读者的性别：</label>
+            <#assign thevalue=reader.sex/>
             <div class="form-group">
                 <select class="form-control" id="sex" name="sex">
 
@@ -81,7 +81,7 @@
         </form>
     </div>
     <div class="btn-line" style="text-align: center">
-        <a href="javascript:validate()" class="btn btn-primary btn-o">
+        <a href="javascript:formValidate()" class="btn btn-primary btn-o">
             <span>确 定</span>
         </a>
         <a href="javascript:closeSetting();" class="btn btn-default btn-o">
@@ -112,4 +112,43 @@
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
     }
+
+    /**
+     * 表单校验
+     */
+    //表单校验
+    function formValidate(){
+        var readername=$('#readername').val();
+        var barcode=$('#barcode').val();
+        var papernum=$('#papernum').val();
+        var typeid=$('#typeid').val();
+        var vocation=$('#vocation').val();
+        var sex=$('#sex').val();
+        if(readername!=null && barcode !=null && papernum !=null && typeid !=null && vocation !=null && sex !=null){
+            submitProp()
+        }else{
+            alert("error");
+        }
+    }
+    /**
+     * 提交表单
+     */
+    function submitProp(){
+        $('#myform').serialize();
+        url='${pagecontext.request.contextpath}/user/updateuser';
+        $.get(url, $('#myform').serialize(), function(data) {
+            if ("1" == data) {
+                alert('操作成功');
+            } else if ("0" == data){
+                alert('操作失败');
+            } else if("2"==data){
+                alert("传入数据不能为空")
+            } else {
+                alert("网关未开启");
+            }
+            closeSetting();
+            window.location.href='${pagecontext.request.contextpath}/user/getReaderList';
+        }, "text");
+    }
+
 </script>

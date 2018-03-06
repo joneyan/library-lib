@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("libReadertypeBO")
 public class LibReadertypeServiceImpl extends AbstractBO<LibReadertype, LibReadertypeVO, String> implements LibReadertypeService {
 private static final Logger LOGGER  =  LoggerFactory.getLogger(LibReadertypeServiceImpl.class);
@@ -20,4 +22,9 @@ private LibReadertypeDAO libReadertypeDAO;
 protected DAO<LibReadertype, LibReadertypeVO, String> getDAO() {
 return libReadertypeDAO;
 }
+
+    @Override
+    public List<LibReadertypeVO> getPeopleNumList() {
+        return libReadertypeDAO.getPeopleNumList();
+    }
 }

@@ -30,9 +30,9 @@
 
 <if test="entity.sex !=null and entity.sex !=''">,sex </if>
 
-<if test="entity.bannertime !=null and entity.bannertime !=''">,bannertime </if>
+<if test="entity.bannertime !=null">,bannertime </if>
 
-<if test="entity.createdate !=null and entity.createdate !=''">,createdate </if>
+<if test="entity.createdate !=null">,createdate </if>
 
 <if test="entity.remark !=null and entity.remark !=''">,remark </if>
 
@@ -46,7 +46,7 @@
 
 <if test="entity.papertype !=null and entity.papertype !=''">,papertype </if>
 
-<if test="entity.updatedate !=null and entity.updatedate !=''">,updatedate </if>
+<if test="entity.updatedate !=null">,updatedate </if>
 
 <if test="entity.name !=null and entity.name !=''">,name </if>
 
@@ -68,9 +68,9 @@
 
 <if test="entity.sex !=null and entity.sex !=''">,#{entity.sex} </if>
 
-<if test="entity.bannertime !=null and entity.bannertime !=''">,#{entity.bannertime} </if>
+<if test="entity.bannertime !=null">,#{entity.bannertime} </if>
 
-<if test="entity.createdate !=null and entity.createdate !=''">,#{entity.createdate} </if>
+<if test="entity.createdate !=null">,#{entity.createdate} </if>
 
 <if test="entity.remark !=null and entity.remark !=''">,#{entity.remark} </if>
 
@@ -84,7 +84,7 @@
 
 <if test="entity.papertype !=null and entity.papertype !=''">,#{entity.papertype} </if>
 
-<if test="entity.updatedate !=null and entity.updatedate !=''">,#{entity.updatedate} </if>
+<if test="entity.updatedate !=null">,#{entity.updatedate} </if>
 
 <if test="entity.name !=null and entity.name !=''">,#{entity.name} </if>
 
@@ -121,15 +121,15 @@
 <if test="entity != null"><if test="entity.birthday !=null and entity.birthday !=''">,birthday = #{entity.birthday}</if>
 <if test="entity.remainum !=null and entity.remainum !=''">,remainum = #{entity.remainum}</if>
 <if test="entity.sex !=null and entity.sex !=''">,sex = #{entity.sex}</if>
-<if test="entity.bannertime !=null and entity.bannertime !=''">,bannertime = #{entity.bannertime}</if>
-<if test="entity.createdate !=null and entity.createdate !=''">,createdate = #{entity.createdate}</if>
+<if test="entity.bannertime !=null">,bannertime = #{entity.bannertime}</if>
+<if test="entity.createdate !=null">,createdate = #{entity.createdate}</if>
 <if test="entity.remark !=null and entity.remark !=''">,remark = #{entity.remark}</if>
 <if test="entity.operator !=null and entity.operator !=''">,operator = #{entity.operator}</if>
 <if test="entity.readertel !=null and entity.readertel !=''">,readertel = #{entity.readertel}</if>
 <if test="entity.vocation !=null and entity.vocation !=''">,vocation = #{entity.vocation}</if>
 <if test="entity.readermail !=null and entity.readermail !=''">,readermail = #{entity.readermail}</if>
 <if test="entity.papertype !=null and entity.papertype !=''">,papertype = #{entity.papertype}</if>
-<if test="entity.updatedate !=null and entity.updatedate !=''">,updatedate = #{entity.updatedate}</if>
+<if test="entity.updatedate !=null">,updatedate = #{entity.updatedate}</if>
 <if test="entity.name !=null and entity.name !=''">,name = #{entity.name}</if>
 <if test="entity.papernum !=null and entity.papernum !=''">,papernum = #{entity.papernum}</if>
 <if test="entity.typeid !=null and entity.typeid !=''">,typeid = #{entity.typeid}</if>
@@ -143,15 +143,15 @@
 <if test="condition.birthday !=null and condition.birthday !=''"> AND birthday = #{condition.birthday}</if>
 <if test="condition.remainum !=null and condition.remainum !=''"> AND remainum = #{condition.remainum}</if>
 <if test="condition.sex !=null and condition.sex !=''"> AND sex = #{condition.sex}</if>
-<if test="condition.bannertime !=null and condition.bannertime !=''"> AND bannertime = #{condition.bannertime}</if>
-<if test="condition.createdate !=null and condition.createdate !=''"> AND createdate = #{condition.createdate}</if>
+<if test="condition.bannertime !=null"> AND bannertime = #{condition.bannertime}</if>
+<if test="condition.createdate !=null"> AND createdate = #{condition.createdate}</if>
 <if test="condition.remark !=null and condition.remark !=''"> AND remark = #{condition.remark}</if>
 <if test="condition.operator !=null and condition.operator !=''"> AND operator = #{condition.operator}</if>
 <if test="condition.readertel !=null and condition.readertel !=''"> AND readertel = #{condition.readertel}</if>
 <if test="condition.vocation !=null and condition.vocation !=''"> AND vocation = #{condition.vocation}</if>
 <if test="condition.readermail !=null and condition.readermail !=''"> AND readermail = #{condition.readermail}</if>
 <if test="condition.papertype !=null and condition.papertype !=''"> AND papertype = #{condition.papertype}</if>
-<if test="condition.updatedate !=null and condition.updatedate !=''"> AND updatedate = #{condition.updatedate}</if>
+<if test="condition.updatedate !=null"> AND updatedate = #{condition.updatedate}</if>
 <if test="condition.name !=null and condition.name !=''"> AND name = #{condition.name}</if>
 <if test="condition.papernum !=null and condition.papernum !=''"> AND papernum = #{condition.papernum}</if>
 <if test="condition.typeid !=null and condition.typeid !=''"> AND typeid = #{condition.typeid}</if>

@@ -75,7 +75,7 @@ public class ManagerController {
         }else{
             model.addAttribute("message","重置失败!确认选中用户");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
+        model.addAttribute("tourl","/manager/getbookemanagerlist");
         return "messager";
     }
 
@@ -97,7 +97,7 @@ public class ManagerController {
         }else{
             model.addAttribute("message","删除失败!确认选中用户");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
+        model.addAttribute("tourl","/manager/getbookemanagerlist");
         return "messager";
     }
 
@@ -113,7 +113,7 @@ public class ManagerController {
             List<LibManager> libManagers = libManagerService.find(libManagerVO);
             if(libManagers.size()>0){
                 model.addAttribute("message","添加失败已经存在此管理员！");
-                model.addAttribute("tourl","http://10.0.9.193:8088/manager_add");
+                model.addAttribute("tourl","/manager_add");
                 return "messager";
             }
             LibManager libManager = new LibManager();
@@ -126,7 +126,7 @@ public class ManagerController {
         }else{
             model.addAttribute("message","添加失败!确认填入数据！");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/manager/getbookemanagerlist");
+        model.addAttribute("tourl","/manager/getbookemanagerlist");
         return "messager";
     }
 }

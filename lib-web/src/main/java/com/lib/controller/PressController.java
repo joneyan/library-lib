@@ -81,7 +81,7 @@ public class PressController {
             List<LibPress> libPresses = libPressService.find(libPressVO);
             if(libPresses.size()>0){
                 model.addAttribute("message","新增失败！已经存在此出版社");
-                model.addAttribute("tourl","http://10.0.9.193:8088/press_add");
+                model.addAttribute("tourl","/press_add");
                 return "messager";
             }
             LibPress libPress = new LibPress();
@@ -94,7 +94,7 @@ public class PressController {
         }else{
             model.addAttribute("message","输入不能为空，添加失败！");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/press/getbookepresslist");
+        model.addAttribute("tourl","/press/getbookepresslist");
         return "messager";
 
     }
@@ -107,7 +107,7 @@ public class PressController {
         }else{
             model.addAttribute("message","删除失败！");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/press/getbookepresslist");
+        model.addAttribute("tourl","/press/getbookepresslist");
         return "messager";
     }
     @RequestMapping("/turnuse")
@@ -120,7 +120,7 @@ public class PressController {
         }else{
             model.addAttribute("message","修改失败！");
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/press/getbookepresslist");
+        model.addAttribute("tourl","/press/getbookepresslist");
         return "messager";
     }
 }

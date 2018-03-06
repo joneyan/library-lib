@@ -8,8 +8,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Repository("libReadertypeDao")
-public class LibReadertypeDAOImpl extends AbstractDAO<LibReadertype, LibReadertypeVO, String> implements LibReadertypeDAO {
+public class  LibReadertypeDAOImpl extends AbstractDAO<LibReadertype, LibReadertypeVO, String> implements LibReadertypeDAO {
 @Autowired
 private SqlSessionTemplate sqlSessionTemplate;
 @Override
@@ -20,4 +23,11 @@ return sqlSessionTemplate;
 protected String getNamespace() {
 return "libReadertypeDao";
 }
+
+    @Override
+    public List<LibReadertypeVO> getPeopleNumList() {
+        HashMap<String, Object> map = new HashMap<>();
+        List<LibReadertypeVO> libReadertypeVOs = sqlSessionTemplate.selectList(getNamespace() + "_EXT.getPeopleNumList", map);
+        return libReadertypeVOs;
+    }
 }

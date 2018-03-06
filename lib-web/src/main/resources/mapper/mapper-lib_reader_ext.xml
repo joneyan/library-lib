@@ -159,6 +159,9 @@ rd.barcode AS barcode,
 <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
 <if test="condition.barcode !=null and condition.barcode !=''"> AND barcode = #{condition.barcode}</if>
 <if test="condition.isBanner !=null and condition.isBanner !=''"> AND bannertime IS  NOT NULL </if>
+<if test="startTime !=null and startTime !='' and endTime !=null and endTime !=''">AND  createdate BETWEEN #{startTime} AND #{endTime}</if>
+<if test="startTime !=null and startTime !='' and (endTime ==null or endTime =='')">AND  createdate &gt; #{startTime}</if>
+<if test="(startTime ==null or startTime =='') and endTime !=null and endTime !=''">AND  createdate &lt; #{endTime}</if>
 </if>
 </sql>
 <sql id="sql_pagination_end">
@@ -189,9 +192,11 @@ limit ${startRow-1},#{limit}
 <select id="findBannerReader" resultMap="libReader" parameterType="java.util.Map">
       SELECT
         <include refid="sql_column_list"/>
-        lrt.rolename AS readerType
+        lrt.rolename AS readerType,
+         lmn.username AS domanager
       FROM lib_reader rd LEFT JOIN lib_readertype lrt
       ON rd.typeid=lrt.id
+      LEFT  JOIN lib_manager lmn ON lmn.id=rd.operator
       <where>
       <include refid="sql_condition"/>
       </where>
@@ -201,12 +206,15 @@ limit ${startRow-1},#{limit}
     <select id="countCutoms" resultMap="libReader" parameterType="java.util.Map">
         SELECT
         <include refid="sql_column_list"/>
-        lrt.rolename AS readerType
+        lrt.rolename AS readerType,
+        lmn.username AS domanager
         FROM lib_reader rd LEFT JOIN lib_readertype lrt
         ON rd.typeid=lrt.id
+        LEFT  JOIN lib_manager lmn ON lmn.id=rd.operator
         <where>
             <include refid="sql_condition"/>
         </where>
+
         ORDER BY updatedate DESC
     </select>
 </mapper>

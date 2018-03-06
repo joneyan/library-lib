@@ -101,8 +101,8 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/reader_add">新增读者</a></li>
-                        <li><a class="" href="readertype_mana.html">读者类型管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

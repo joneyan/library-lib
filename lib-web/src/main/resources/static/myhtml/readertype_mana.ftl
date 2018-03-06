@@ -26,6 +26,9 @@
     <script src="${pagecontext.request.contextPath}/js/jquery.js"></script>
     <script src="${pagecontext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
     <script src="${pagecontext.request.contextPath}/js/bootstrap.min.js"></script>
+    <style type="text/css">table{border:1px solid; border-top:1px solid;text-align:center;border-collapse:collapse;}
+    th{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}
+    td{border:1px solid ;border-left:1px solid ;border-top: 1px solid;  border-right: 1px solid;}</style>
 </head>
 <body>
 
@@ -72,37 +75,37 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="">
-                    <a class="" href="index.html">
+                    <a class="" href="${pagecontext.request.getcontextpath}/index">
                         <i class="icon-dashboard"></i>
                         <span>首页</span>
                     </a>
                 </li>
-                <li class="sub-menu active">
+                <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon-book"></i>
                         <span>系统设置</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
-                        <li><a class="" href="${pagecontext.request.contextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
-                        <#if managerlog.status==1>
-                            <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
-                        </#if>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
+                        <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                    <#if managerlog.status==1>
+                        <li class=""><a href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                    </#if>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a href="javascript:;" class="">
                         <i class="icon-cogs"></i>
                         <span>读者管理</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
+                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -152,11 +155,73 @@
         </div>
     </aside>      <!--sidebar end-->
     <!--main content start 内容-->
-    <section id="main-content" style="background-image: url('${pagecontext.request.contextpath}/img/tsg2.jpg')">
-        <section class="wrapper" style="height:700px;">
-            <div class="alert alert-success" style="margin: 0 auto;width: 600px;height: 50px;font-size: larger;" role="alert" >${message}将在<span id="autos" style="font-size: large;color: red">5</span>秒后返回!如未跳转请
-                <a href="${tourl}">点击跳转</a></div>
-<input type="hidden" id="tourl" value="${tourl}">
+    <section id="main-content">
+        <section class="wrapper" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型</a></li>
+                <li role="presentation"><a href="#" onclick="openaddpage()">新增类型</a></li>
+            </ul>
+            <hr/>
+            <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
+                <caption style="color: #18d4cb;font-size: 30px;">读者类型列表</caption>
+                <tr>
+                    <th style="text-align: center;">编号</th>
+                    <th style="text-align: center;">名字</th>
+                    <th style="text-align: center;">可借数量</th>
+                    <th style="text-align: center;">目前人数</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+            <#list pagebean.pageElements as case>
+                <input type="hidden" id="typeid" name="typeid" value="${case.id}">
+                <tr>
+                    <td style="text-align: center;font-size: large;" id="">${case.id}</td>
+                    <td style="text-align: center;font-size: large;">${case.rolename}</td>
+                    <td style="text-align: center;font-size: large;">${case.brownum}</td>
+                    <#if case.peoplenum==null>
+                        <td style="text-align: center;font-size: large;">0</td>
+                    </#if>
+                    <#if case.peoplenum &gt;0>
+                        <td style="text-align: center;font-size: large;">${case.peoplenum}</td>
+                    </#if>
+
+                    <td style="text-align: center;font-size: large;">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button class="updatetype" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}">
+                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
+                            </button>
+                            <button class="deletetype" type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/usertype/removetype?id=${case.id}'">
+                                <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </#list>
+            </table>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li>一共&nbsp;<span>${pagebean.totalNum}</span>&nbsp;条数据&nbsp;&nbsp;
+                        <span>${pagebean.page}</span>/<span>${pagebean.totalPage}</span>业</li>
+                <#if pagebean.totalPage == pagebean.page &&pagebean.page==1>
+                    <li><a href="javascript:void(0)">上一页</a></li>
+                    <li><a href="javascript:void(0)">下一页</a></li>
+                </#if>
+
+                <#if pagebean.totalPage gt pagebean.page && pagebean.page != 1>
+                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
+                </#if>
+                <#if pagebean.totalPage gt pagebean.page && pagebean.page == 1>
+                    <li><a href="javascript:void(0)">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/bookcase/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
+                </#if>
+
+                <#if pagebean.totalPage == pagebean.page && pagebean.totalPage gt 1>
+                    <li><a href="${pagecontext.request.contextpath}/press/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="javascript:void(0)">下一页</a></li>
+                </#if>
+                </ul>
+            </nav>
+
         </section>      </section>
     <!--main content end-->
 </section>
@@ -172,7 +237,9 @@
 <!--script for this page-->
 <script src="${pagecontext.request.contextPath}/js/sparkline-chart.js"></script>
 <script src="${pagecontext.request.contextPath}/js/easy-pie-chart.js"></script>
-<script src="${pagecontext.request.contextPath}/js/myjs/common.js"></script>
+<script src="${pagecontext.request.contextPath}/js/myjs/selectjs.js"></script>
+<script src="${pagecontext.request.contextPath}/js/myjs/date.js"></script>
+<script src="${pagecontext.request.contextPath}/js/layer/layer.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
@@ -189,6 +256,34 @@
     $(function(){
         $('select.styled').customSelect();
     });
+    //打开一个修改页面弹窗
+    $(".updatetype").click(function(){
+        var readertypeid=$(this).attr("typeid");
+        var url='${pagecontext.request.contextpath}/usertype/toeditpage?id='+readertypeid;
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['800px', '500px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    })
+
+    //打开一个新增页面弹窗
+    function openaddpage(){
+        var url='${pagecontext.request.contextpath}/usertype/toaddpage';
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['400px', '300px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    }
 
 </script>
 

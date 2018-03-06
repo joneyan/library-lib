@@ -74,7 +74,7 @@ public class LibraryController {
                 model.addAttribute("message","修改失败");
             }
         }
-        model.addAttribute("tourl","http://10.0.9.193:8088/library/getEditInfo");
+        model.addAttribute("tourl","/library/getEditInfo");
         return "messager";
     }
 }
