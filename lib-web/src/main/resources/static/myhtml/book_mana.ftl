@@ -96,7 +96,7 @@
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu active">
+                <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon-cogs"></i>
                         <span>读者管理</span>
@@ -105,17 +105,17 @@
                     <ul class="sub">
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
                         <li class=""><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
-                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a href="javascript:;" class="">
                         <i class="icon-tasks"></i>
                         <span>图书管理</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
+                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
                         <li><a class="" href="book_add.html">新增图书</a></li>
                         <li><a class="" href="booktype_mana.html">图书类型管理</a></li>
                     </ul>
@@ -158,9 +158,99 @@
     <section id="main-content">
         <section class="wrapper" >
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型</a></li>
-                <li role="presentation"><a href="#" onclick="openaddpage()">新增类型</a></li>
+                <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/book/getBookList">图书列表</a></li>
+                <li role="presentation"><a href="#" onclick="openaddpage()">新增图书</a></li>
             </ul>
+            <form class="form-inline" action="${pagecontext.request.getcontextpath}/book/getBookList">
+
+                <label for="readername">图书名字：</label>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" id="bookname" name="bookname" value="${book.name}">
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="barcode">作者：</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="author" name="author" value="${book.barcode}">
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="papernum">读者身份证：</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="papernum" name="papernum" value="${reader.papernum}">
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="status">最近操作管理：</label>
+                <div class="form-group">
+                <#assign thevalue=reader.operator/>
+                    <select class="form-control" id="operator" name="operator">
+
+                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                    <#list operators as manager>
+                        <option value="${manager.id}" <#if (((thevalue)!'') == '${manager.id}')>selected="selected"</#if>>${book.operatorname}</option>
+                    </#list>
+                    </select>
+
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="status">出版社：</label>
+                <div class="form-group">
+                <#assign thevalue=reader.operator/>
+                    <select class="form-control" id="pressid" name="pressid">
+
+                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                    <#list presses as press>
+                        <option value="${press.id}" <#if (((thevalue)!'') == '${press.id}')>selected="selected"</#if>>${book.pressname}</option>
+                    </#list>
+                    </select>
+
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="status">书籍类别：</label>
+                <div class="form-group">
+                <#assign thevalue=reader.operator/>
+                    <select class="form-control" id="pressid" name="pressid">
+
+                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                    <#list catelogs as catelog>
+                        <option value="${catelog.id}" <#if (((thevalue)!'') == '${catelog.id}')>selected="selected"</#if>>${book.catelogname}</option>
+                    </#list>
+                    </select>
+
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="status">书架：</label>
+                <div class="form-group">
+
+                <#assign thevalue=reader.typeid/>
+                    <select class="form-control" id="bookcaseid" name="bookcaseid">
+
+                        <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                    <#list types as type>
+                        <option   value="${type.id}" <#if (((thevalue)!'') == '${type.id}')>selected="selected"</#if>>${type.rolename}</option>
+                    </#list>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;<label for="readername">读者职业：</label>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" id="vocation" name="vocation" value="${reader.vocation}">
+                </div>
+                &nbsp;&nbsp;&nbsp;<label>入馆时间:</label>
+                <div class="form-group">
+                    <input readonly="readonly" name="startTime" id="startTime" class="form-control" type="text" value="${startTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
+                </div>
+                <a href="javascript:var n = document.getElementById('startTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
+                &nbsp;&nbsp;&nbsp;<label>到:</label>
+                <div class="form-group">
+                    <input readonly="readonly" name="endTime" id="endTime" class="form-control" type="text" value="${endTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
+                </div>
+                <a href="javascript:var n = document.getElementById('endTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
+                &nbsp;&nbsp;&nbsp;<label>性别：</label>
+            <#assign thevalue2=reader.sex/>
+                <div class="form-group">
+                    <select class="form-control" id="sex" name="sex">
+
+                        <option  value="-1" <#if (((thevalue2)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
+                        <option   value="1" <#if (((thevalue2)!'') == '1')>selected="selected"</#if>>男</option>
+                        <option   value="2" <#if (((thevalue2)!'') == '2')>selected="selected"</#if>>女</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
             <hr/>
             <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
                 <caption style="color: #18d4cb;font-size: 30px;">读者类型列表</caption>

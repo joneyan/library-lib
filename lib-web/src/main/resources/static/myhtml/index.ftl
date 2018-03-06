@@ -315,7 +315,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="book_list.html">所有图书</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
                         <li><a class="" href="book_add.html">新增图书</a></li>
                         <li><a class="" href="booktype_mana.html">图书类型管理</a></li>
                     </ul>
@@ -339,7 +339,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="book_list.html">图书档案查询</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">图书档案查询</a></li>
                         <li><a class="" href="book_borrowlist.html">图书借阅查询</a></li>
                         <li><a class="" href="book_borrownotime.html">图书借阅快到期</a></li>
                     </ul>

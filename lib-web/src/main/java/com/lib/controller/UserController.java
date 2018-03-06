@@ -258,7 +258,7 @@ public class UserController {
             if(remove >0){
                 model.addAttribute("message","删除成功！");
             }else{
-                model.addAttribute("message","删除成功！请确认数据库有此数据");
+                model.addAttribute("message","删除失败！请确认数据库有此数据");
             }
         }else{
             model.addAttribute("message","不能删除，此用户还有未归还图书");
