@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("libBookinfoBO")
 public class LibBookinfoServiceImpl extends AbstractBO<LibBookinfo, LibBookinfoVO, String> implements LibBookinfoService {
 private static final Logger LOGGER  =  LoggerFactory.getLogger(LibBookinfoServiceImpl.class);
@@ -20,4 +22,14 @@ private LibBookinfoDAO libBookinfoDAO;
 protected DAO<LibBookinfo, LibBookinfoVO, String> getDAO() {
 return libBookinfoDAO;
 }
+
+    @Override
+    public List<LibBookinfoVO> getBookList(LibBookinfoVO libBookinfoVO, Integer pagesize, Integer page, String startTime, String endTime) {
+        return libBookinfoDAO.getBookList( libBookinfoVO,  pagesize,  page,  startTime,  endTime);
+    }
+
+    @Override
+    public Integer getBookListTotal(LibBookinfoVO libBookinfoVO, String startTime, String endTime) {
+        return libBookinfoDAO.getBookListTotal( libBookinfoVO,  startTime,  endTime);
+    }
 }

@@ -22,7 +22,7 @@
 <sql id="sql_insert_column_list">
 <trim prefix="" prefixOverrides=",">
 
-<if test="entity.intime !=null and entity.intime !=''">,intime </if>
+<if test="entity.intime !=null">,intime </if>
 
 <if test="entity.author !=null and entity.author !=''">,author </if>
 
@@ -56,7 +56,7 @@
 <sql id="sql_insert_property_list">
 <trim prefix="" prefixOverrides=",">
 
-<if test="entity.intime !=null and entity.intime !=''">,#{entity.intime} </if>
+<if test="entity.intime !=null">,#{entity.intime} </if>
 
 <if test="entity.author !=null and entity.author !=''">,#{entity.author} </if>
 
@@ -106,7 +106,7 @@
 </trim></sql>
 <sql id="sql_update_set">
 <trim prefix="SET" prefixOverrides=",">
-<if test="entity != null"><if test="entity.intime !=null and entity.intime !=''">,intime = #{entity.intime}</if>
+<if test="entity != null"><if test="entity.intime !=null">,intime = #{entity.intime}</if>
 <if test="entity.author !=null and entity.author !=''">,author = #{entity.author}</if>
 <if test="entity.isbn !=null and entity.isbn !=''">,isbn = #{entity.isbn}</if>
 <if test="entity.operator !=null and entity.operator !=''">,operator = #{entity.operator}</if>
@@ -126,7 +126,7 @@
 </sql>
 <sql id="sql_condition">
 <if test="condition != null">
-<if test="condition.intime !=null and condition.intime !=''"> AND intime = #{condition.intime}</if>
+<if test="condition.intime !=null"> AND intime = #{condition.intime}</if>
 <if test="condition.author !=null and condition.author !=''"> AND author = #{condition.author}</if>
 <if test="condition.isbn !=null and condition.isbn !=''"> AND isbn = #{condition.isbn}</if>
 <if test="condition.operator !=null and condition.operator !=''"> AND operator = #{condition.operator}</if>

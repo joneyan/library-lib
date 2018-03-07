@@ -24,7 +24,7 @@
 </sql>
 <sql id="sql_column_list">
 id,
-casename,
+casename
 </sql>
 <sql id="sql_update_set">
 <trim prefix="SET" prefixOverrides=",">
@@ -35,9 +35,7 @@ casename,
 </sql>
 <sql id="sql_condition">
 <if test="condition != null">
-<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
 <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
-<if test="entity.casename !=null and entity.casename !=''">,casename = #{entity.casename}</if>
 <if test="condition.casename !=null and condition.casename !=''"> AND casename = #{condition.casename}</if>
 </if>
 </sql>
