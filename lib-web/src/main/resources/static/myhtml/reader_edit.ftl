@@ -147,8 +147,23 @@
                 alert("网关未开启");
             }
             closeSetting();
-            window.location.href='${pagecontext.request.contextpath}/user/getReaderList';
+            top.location.href='${pagecontext.request.contextpath}/user/getReaderList';
         }, "text");
+    }
+
+    //打开一个新增页面弹窗
+    function openaddpage(){
+        var url='${pagecontext.request.contextpath}/book/toaddpage';
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['800px', '530px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,scrollbar:true//是否允许出现滚动条
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
     }
 
 </script>

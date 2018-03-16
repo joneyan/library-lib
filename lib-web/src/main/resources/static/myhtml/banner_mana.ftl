@@ -116,8 +116,8 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
-                        <li><a class="" href="book_add.html">新增图书</a></li>
-                        <li><a class="" href="booktype_mana.html">图书类型管理</a></li>
+                        <li><a class="" href="javascript:openaddpage();">新增图书</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">图书类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -233,7 +233,7 @@
                     <td style="text-align: center;font-size: large;">${case.readerType}</td>
                     <td style="text-align: center;font-size: large;">
                         <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/user/resetManner?&id=${case.id}'">
+                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/user/resetManner?&id=${case.id}'">
                                 <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;解除封禁</font></span>
                             </button>
                         </div>
@@ -298,6 +298,21 @@
     $(function(){
         $('select.styled').customSelect();
     });
+
+    //打开一个新增页面弹窗
+    function openaddpage(){
+        var url='${pagecontext.request.contextpath}/book/toaddpage';
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['800px', '530px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,scrollbar:true//是否允许出现滚动条
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    }
 
 </script>
 

@@ -161,7 +161,7 @@
                 alert("网关未开启");
             }
             closeSetting();
-            window.location.href='${pagecontext.request.contextpath}/user/getReaderList';
+            top.location.href='${pagecontext.request.contextpath}/user/getReaderList';
         }, "text");
     }
 

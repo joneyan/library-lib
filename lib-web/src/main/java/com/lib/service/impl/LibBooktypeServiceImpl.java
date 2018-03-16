@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("libBooktypeBO")
 public class LibBooktypeServiceImpl extends AbstractBO<LibBooktype, LibBooktypeVO, String> implements LibBooktypeService {
 private static final Logger LOGGER  =  LoggerFactory.getLogger(LibBooktypeServiceImpl.class);
@@ -20,4 +22,9 @@ private LibBooktypeDAO libBooktypeDAO;
 protected DAO<LibBooktype, LibBooktypeVO, String> getDAO() {
 return libBooktypeDAO;
 }
+
+    @Override
+    public List<LibBooktypeVO> getPeopleNumList() {
+        return libBooktypeDAO.getPeopleNumList();
+    }
 }

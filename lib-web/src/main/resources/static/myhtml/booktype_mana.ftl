@@ -96,7 +96,7 @@
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu ">
                     <a href="javascript:;" class="">
                         <i class="icon-cogs"></i>
                         <span>读者管理</span>
@@ -115,9 +115,9 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
-                        <li><a class="" href="javascript:openaddpage();">新增图书</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">图书类型管理</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
+                        <li><a class="" href="javascript:openaddpage2();">新增图书</a></li>
+                        <li  class="active"><a  href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">图书类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -158,128 +158,30 @@
     <section id="main-content">
         <section class="wrapper" >
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/book/getBookList">图书列表</a></li>
-                <li role="presentation"><a href="#" onclick="openaddpage()">新增图书</a></li>
+                <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">书籍类型</a></li>
+                <li role="presentation"><a href="#" onclick="openaddpage()">新增类型</a></li>
             </ul>
-            <form class="form-inline" action="${pagecontext.request.getcontextpath}/book/getBookList">
-
-                <label for="bookname">图书名字：</label>
-                <div class="form-group">
-
-                    <input type="text" class="form-control" id="bookname" name="bookname" value="${book.bookname}">
-                </div>
-                &nbsp;&nbsp;&nbsp;<label for="barcode">作者：</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="author" name="author" value="${book.author}">
-                </div>
-                &nbsp;&nbsp;&nbsp;<label for="status">最近操作管理：</label>
-                <div class="form-group">
-                <#assign thevalue=book.operator/>
-                    <select class="form-control" id="operator" name="operator">
-
-                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                    <#list operators as manager>
-                        <option value="${manager.id}" <#if (((thevalue)!'') == '${manager.id}')>selected="selected"</#if>>${manager.username}</option>
-                    </#list>
-                    </select>
-
-                </div>
-                &nbsp;&nbsp;&nbsp;<label for="pressid">出版社：</label>
-                <div class="form-group">
-                <#assign thevalue=book.pressid/>
-                    <select class="form-control" id="pressid" name="pressid">
-
-                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                    <#list presses as press>
-                        <option value="${press.id}" <#if (((thevalue)!'') == '${press.id}')>selected="selected"</#if>>${press.pubname}</option>
-                    </#list>
-                    </select>
-
-                </div>
-                &nbsp;&nbsp;&nbsp;<label for="typeid">书籍类别：</label>
-                <div class="form-group">
-                <#assign thevalue=book.typeid/>
-                    <select class="form-control" id="typeid" name="typeid">
-
-                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                    <#list catelogs as catelog>
-                        <option value="${catelog.id}" <#if (((thevalue)!'') == '${catelog.id}')>selected="selected"</#if>>${catelog.typename}</option>
-                    </#list>
-                    </select>
-
-                </div>
-                &nbsp;&nbsp;&nbsp;<label for="bookcaseid">书架：</label>
-                <div class="form-group">
-
-                <#assign thevalue=book.bookcaseid/>
-                    <select class="form-control" id="bookcaseid" name="bookcaseid">
-
-                        <option  value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                    <#list bookcases as type>
-                        <option   value="${type.id}" <#if (((thevalue)!'') == '${type.id}')>selected="selected"</#if>>${type.casename}</option>
-                    </#list>
-                    </select>
-                </div>
-                &nbsp;&nbsp;&nbsp;<label>入馆时间:</label>
-                <div class="form-group">
-                    <input readonly="readonly" name="startTime" id="startTime" class="form-control" type="text" value="${startTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
-                </div>
-                <a href="javascript:var n = document.getElementById('startTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
-                &nbsp;&nbsp;&nbsp;<label>到:</label>
-                <div class="form-group">
-                    <input readonly="readonly" name="endTime" id="endTime" class="form-control" type="text" value="${endTime}" onclick="SelectDate(event,this,'yyyy-MM-dd');return false;" />
-                </div>
-                <a href="javascript:var n = document.getElementById('endTime');SelectDate(event,n,'yyyy-MM-dd');" title="" ><span class="glyphicon glyphicon-calendar"></span></a>
-                &nbsp;&nbsp;&nbsp;<label>状态：</label>
-            <#assign thevalue2=book.status/>
-                <div class="form-group">
-                    <select class="form-control" id="status" name="status">
-
-                        <option  value="-1" <#if (((thevalue2)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                        <option   value="1" <#if (((thevalue2)!'') == '1')>selected="selected"</#if>>上架</option>
-                        <option   value="2" <#if (((thevalue2)!'') == '2')>selected="selected"</#if>>未上架</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
             <hr/>
             <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
                 <caption style="color: #18d4cb;font-size: 30px;">读者类型列表</caption>
                 <tr>
                     <th style="text-align: center;">编号</th>
-                    <th style="text-align: center;">书籍名称</th>
-                    <th style="text-align: center;">剩余数量</th>
-                    <th style="text-align: center;">出版社</th>
-                    <th style="text-align: center;">书架</th>
-                    <th style="text-align: center;">类别</th>
-                    <th style="text-align: center;">书籍条码</th>
-                    <th style="text-align: center;">国际图书编号</th>
-                    <th style="text-align: center;">书籍状态</th>
+                    <th style="text-align: center;">类型名</th>
+                    <th style="text-align: center;">可借天数</th>
                     <th style="text-align: center;">操作</th>
                 </tr>
             <#list pagebean.pageElements as case>
                 <input type="hidden" id="typeid" name="typeid" value="${case.id}">
                 <tr>
                     <td style="text-align: center;font-size: large;" id="">${case.id}</td>
-                    <td style="text-align: center;font-size: large;">${case.bookname}</td>
-                    <td style="text-align: center;font-size: large;">${case.leftnum}</td>
-                    <td style="text-align: center;font-size: large;">${case.pressname}</td>
-                    <td style="text-align: center;font-size: large;">${case.casename}</td>
-                    <td style="text-align: center;font-size: large;">${case.catename}</td>
-                    <td style="width: 245px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;font-size: large;">${case.barcode}</td>
-                    <td style="width: 245px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;font-size: large;">${case.isbn}</td>
-                    <#if case.status=='1'>
-                        <td style="text-align: center;font-size: large;">上架</td>
-                    </#if>
-                    <#if case.status=='2'>
-                        <td style="text-align: center;font-size: large;">未上架</td>
-                    </#if>
+                    <td style="text-align: center;font-size: large;">${case.typename}</td>
+                    <td style="text-align: center;font-size: large;">${case.days}</td>
                     <td style="text-align: center;font-size: large;">
                         <div class="btn-group" role="group" aria-label="...">
-                            <button class="updatetype" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}">
+                            <button class="updatebooktype" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}">
                                 <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
                             </button>
-                            <button class="deletetype" type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/usertype/removetype?id=${case.id}'">
+                            <button class="deletetype" type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/booktype/removetype?id=${case.id}'">
                                 <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
                             </button>
                         </div>
@@ -297,16 +199,16 @@
                 </#if>
 
                 <#if pagebean.totalPage gt pagebean.page && pagebean.page != 1>
-                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
-                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/booktype/getBookTypeList?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/booktype/getBookTypeList?page=${pagebean.page+1}">下一页</a></li>
                 </#if>
                 <#if pagebean.totalPage gt pagebean.page && pagebean.page == 1>
                     <li><a href="javascript:void(0)">上一页</a></li>
-                    <li><a href="${pagecontext.request.contextpath}/bookcase/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/booktype/getBookTypeList?page=${pagebean.page+1}">下一页</a></li>
                 </#if>
 
                 <#if pagebean.totalPage == pagebean.page && pagebean.totalPage gt 1>
-                    <li><a href="${pagecontext.request.contextpath}/press/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/booktype/getBookTypeList?page=${pagebean.page-1}">上一页</a></li>
                     <li><a href="javascript:void(0)">下一页</a></li>
                 </#if>
                 </ul>
@@ -347,9 +249,10 @@
         $('select.styled').customSelect();
     });
     //打开一个修改页面弹窗
-    $(".updatetype").click(function(){
+    $(".updatebooktype").click(function(){
+        debugger;
         var readertypeid=$(this).attr("typeid");
-        var url='${pagecontext.request.contextpath}/usertype/toeditpage?id='+readertypeid;
+        var url='${pagecontext.request.contextpath}/booktype/toeditpage?id='+readertypeid;
         layer.open({
             type: 2 //Page层类型
             ,area: ['800px', '500px']
@@ -363,7 +266,21 @@
 
     //打开一个新增页面弹窗
     function openaddpage(){
-        var url='${pagecontext.request.contextpath}/book/toaddpage';
+        var url='${pagecontext.request.contextpath}/booktype/toaddpage';
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['400px', '300px']
+            ,title: '新增类型'
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    }
+
+    //打开一个新增页面弹窗
+    function openaddpage2(){
+        var url='${pagecontext.request.contextpath}/booktype/toaddpage';
         layer.open({
             type: 2 //Page层类型
             ,area: ['800px', '530px']

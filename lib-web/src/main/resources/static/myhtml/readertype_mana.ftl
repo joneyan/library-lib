@@ -116,8 +116,8 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
-                        <li><a class="" href="book_add.html">新增图书</a></li>
-                        <li><a class="" href="booktype_mana.html">图书类型管理</a></li>
+                        <li><a class="" href="javascript:openaddpage2();">新增图书</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">图书类型管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -189,7 +189,7 @@
                             <button class="updatetype" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}">
                                 <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;修改</font></span>
                             </button>
-                            <button class="deletetype" type="button" class="btn btn-default" style="background-color: peachpuff" onclick="window.location.href='${pagecontext.request.contextpath}/usertype/removetype?id=${case.id}'">
+                            <button class="deletetype" type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/usertype/removetype?id=${case.id}'">
                                 <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
                             </button>
                         </div>
@@ -258,6 +258,7 @@
     });
     //打开一个修改页面弹窗
     $(".updatetype").click(function(){
+        debugger;
         var readertypeid=$(this).attr("typeid");
         var url='${pagecontext.request.contextpath}/usertype/toeditpage?id='+readertypeid;
         layer.open({
@@ -272,7 +273,7 @@
     })
 
     //打开一个新增页面弹窗
-    function openaddpage(){
+    function openaddpage2(){
         var url='${pagecontext.request.contextpath}/usertype/toaddpage';
         layer.open({
             type: 2 //Page层类型

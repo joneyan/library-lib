@@ -24,16 +24,16 @@
 <body>
 <div style="margin: 0 auto; width: 300px;border-radius: 10px;border: 1 solid red;background-color: burlywood">
     <hr/>
-    <form id="myform" method="post" class="form-inline" action="${pagecontext.request.getcontextpath}/user/edituser" onsubmit="return formValidate()">
+    <form id="myform" method="post" class="form-inline" action="${pagecontext.request.getcontextpath}/booktype/edittype" onsubmit="return formValidate()">
         &nbsp;&nbsp;&nbsp;<label for="readername">类型名称：</label>
         <div class="form-group">
 
-            <input type="text" style="width: 180px;" class="form-control" id="rolename" name="rolename" value="${readertype.rolename}">
+            <input type="text" style="width: 180px;" class="form-control" id="typename" name="typename" value="${booktype.typename}">
         </div>
         <br/>
-        &nbsp;&nbsp;&nbsp;<label for="barcode">可借数目：</label>
+        &nbsp;&nbsp;&nbsp;<label for="barcode">可借天数：</label>
         <div class="form-group">
-            <input type="text" style="width: 180px;" class="form-control" id="brownum" name="brownum" value="${readertype.brownum}">
+            <input type="text" style="width: 180px;" class="form-control" id="days" name="days" value="${booktype.days}">
         </div>
     </form>
 </div>
@@ -70,15 +70,16 @@
     function closeSetting(){
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
+
     }
 
     /**
      * 表单校验
      */
     function formValidate(){
-        var rolename=$('#rolename').val();
-        var brownum=$('#brownum').val();
-        if(rolename!=null && brownum !=null){
+        var typename=$('#typename').val();
+        var days=$('#days').val();
+        if(typename!=null && days !=null){
             submitProp()
         }else{
             alert("error");
@@ -89,7 +90,7 @@
      */
     function submitProp(){
         $('#myform').serialize();
-        url='${pagecontext.request.contextpath}/usertype/addusrtype';
+        url='${pagecontext.request.contextpath}/booktype/addbooktype';
         $.get(url, $('#myform').serialize(), function(data) {
             if ("1" == data) {
                 alert('操作成功');
@@ -100,14 +101,16 @@
             } else {
                 alert("网关未开启");
             }
+            top.location.href='${pagecontext.request.contextpath}/booktype/getBookTypeList';
             closeSetting();
-            top.location.href='${pagecontext.request.contextpath}/user/getReaderList';
+
         }, "text");
+
     }
 
     //打开一个新增页面弹窗
     function openaddpage(){
-        var url='${pagecontext.request.contextpath}/book/toaddpage';
+        var url='${pagecontext.request.contextpath}/booktype/toaddpage';
         layer.open({
             type: 2 //Page层类型
             ,area: ['800px', '530px']

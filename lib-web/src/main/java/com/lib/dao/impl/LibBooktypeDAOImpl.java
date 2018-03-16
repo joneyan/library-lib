@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("libBooktypeDao")
 public class LibBooktypeDAOImpl extends AbstractDAO<LibBooktype, LibBooktypeVO, String> implements LibBooktypeDAO {
 @Autowired
@@ -20,4 +22,9 @@ return sqlSessionTemplate;
 protected String getNamespace() {
 return "libBooktypeDao";
 }
+
+    @Override
+    public List<LibBooktypeVO> getPeopleNumList() {
+        return sqlSessionTemplate.selectList(getNamespace()+"_EXT.getPeopleNumList");
+    }
 }
