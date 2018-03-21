@@ -125,8 +125,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="book_borrow.html">图书借阅</a></li>
-                        <li><a class="" href="book_borrowlong.html">图书续借</a></li>
+                        <li><a class="" href="${pagecontext.request.contextpath}/borrow/toborrow">图书借阅</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书续借</a></li>
                         <li><a class="" href="book_return.html">图书归还</a></li>
                     </ul>
                 </li>

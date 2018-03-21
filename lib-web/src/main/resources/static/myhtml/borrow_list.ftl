@@ -80,7 +80,7 @@
                         <span>首页</span>
                     </a>
                 </li>
-                <li class="sub-menu active">
+                <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon-book"></i>
                         <span>系统设置</span>
@@ -89,11 +89,11 @@
                     <ul class="sub">
                         <li class="" ><a href="${pagecontext.request.getcontextpath}/library_mana">图书馆设置</a></li>
                         <li class=""><a  href="${pagecontext.request.getcontextpath}/bookcase/getbookecaselist">书架管理</a></li>
-                        <li class="active"><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/press/getbookepresslist">出版社管理</a></li>
                     <#if managerlog.status==1>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
+                        <li class=""><a href="${pagecontext.request.getcontextpath}/manager/getbookemanagerlist">管理员管理</a></li>
                     </#if>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getbookbanneruserlist?isBanner=1">封禁管理</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -103,31 +103,31 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/user/getReaderList">所有读者</a></li>
+                        <li class=""><a class="" href="${pagecontext.request.getcontextpath}/user/toaddpage">新增读者</a></li>
+                        <li class=""><a  href="${pagecontext.request.getcontextpath}/usertype/getusertypelist">读者类型管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu ">
                     <a href="javascript:;" class="">
                         <i class="icon-tasks"></i>
                         <span>图书管理</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
+                        <li ><a  href="${pagecontext.request.getcontextpath}/book/getBookList">所有图书</a></li>
                         <li><a class="" href="javascript:openaddpage();">新增图书</a></li>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/booktype/getBookTypeList">图书类型管理</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a href="javascript:;" class="">
                         <i class="icon-th"></i>
                         <span>图书借还</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="${pagecontext.request.contextpath}/borrow/toborrow">图书借阅</a></li>
+                        <li class="active"><a class="" href="${pagecontext.request.contextpath}/borrow/toborrow">图书借阅</a></li>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书续借</a></li>
                         <li><a class="" href="book_return.html">图书归还</a></li>
                     </ul>
@@ -158,53 +158,61 @@
     <section id="main-content">
         <section class="wrapper" >
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active" style="background-color:lawngreen"><a href="${pagecontext.request.contextpath}/press/getbookepresslist">出版社列表</a></li>
-                <li role="presentation" style="background-color: hotpink"><a href="${pagecontext.request.contextpath}/press_add">新增出版社</a></li>
+                <li role="presentation"  ><a href="${pagecontext.request.getcontextpath}/borrow/toborrow">图书列表</a></li>
+                <li role="presentation" class="active"><a href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">已借图书</a></li>
             </ul>
-            <form class="form-inline" action="${pagecontext.request.contextpath}/press/getbookepresslist">
-                <label for="pubname">出版社名字：</label>
+            <form class="form-inline" action="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">
+
+                <label for="bookname">借书人名字：</label>
                 <div class="form-group">
 
-                    <input type="text" class="form-control" id="pubname" name="pubname" value="${pubname}">
-                </div>
-                <label for="status">状态：</label>
-                <div class="form-group">
-                <#assign thevalue=status/>
-                    <select class="form-control" id="status" name="status">
-                        <option value="-1" <#if (((thevalue)!'') == '-1')>selected="selected"</#if>>--请选择--</option>
-                        <option value="1" <#if (((thevalue)!'') == '1')>selected="selected"</#if>>可用</option>
-                        <option value="2" <#if (((thevalue)!'') == '2')>selected="selected"</#if>>不可用</option>
-                    </select>
+                    <input type="text" class="form-control" id="name" name="name" value="${name}">
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
+            <hr/>
             <table class="table table-striped" style="text-align: center; table-layout: fixed;border-radius: 5px;" cellspacing="0" border="1">
-                <caption style="color: #18d4cb;font-size: 30px;">出版社列表</caption>
+                <caption style="color: #18d4cb;font-size: 30px;">图书列表</caption>
                 <tr>
                     <th style="text-align: center;">编号</th>
-                    <th style="text-align: center;">出版社名字</th>
-                    <th style="text-align: center;">可用状态</th>
+                    <th style="text-align: center;">书籍名称</th>
+                    <th style="text-align: center;">借书日期</th>
+                    <th style="text-align: center;">规定归还日期</th>
+                    <th style="text-align: center;">归还日期</th>
+                    <th style="text-align: center;">借书人</th>
+                    <th style="text-align: center;">操作管理员</th>
+                    <th style="text-align: center;">状态</th>
                     <th style="text-align: center;">操作</th>
                 </tr>
             <#list pagebean.pageElements as case>
+                <input type="hidden" id="typeid" name="typeid" value="${case.id}">
                 <tr>
-                    <td style="text-align: center;font-size: large;">${case.id}</td>
-                    <td style="text-align: center;font-size: large;">${case.pubname}</td>
-                    <td style="text-align: center;font-size: large;"><#if case.status==2>不可用</#if><#if case.status==1>可用</#if></td>
+                    <td style="text-align: center;font-size: large;" id="">${case.id}</td>
+                    <td style="text-align: center;font-size: large;">${case.bookname}</td>
+                    <td style="text-align: center;font-size: large;">${case.borrowTime?string("yyyy-MM-dd")}</td>
+                    <td style="text-align: center;font-size: large;">${case.stipulateTime?string("yyyy-MM-dd")}</td>
+                    <#if case.backTime !=null>
+                        <td style="text-align: center;font-size: large;">${case.backTime?string("yyyy-MM-dd")}</td>
+                    </#if>
+                    <#if case.backTime ==null>
+                        <td style="text-align: center;font-size: large;">未归还</td>
+                    </#if>
+
+                    <td style="text-align: center;font-size: large;">${case.readerName}</td>
+                    <td style="width: 245px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;font-size: large;">${case.manaName}</td>
+                    <#if case.status=='1'>
+                        <td style="text-align: center;font-size: large;">已归还</td>
+                    </#if>
+                    <#if case.status=='2'>
+                        <td style="text-align: center;font-size: large;">未归还</td>
+                    </#if>
                     <td style="text-align: center;font-size: large;">
                         <div class="btn-group" role="group" aria-label="...">
-                            <#if case.status==1>
-                                <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/press/turnuse?status=2&id=${case.id}'">
-                                    <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;停用</font></span>
-                                </button>
-                            </#if>
-                            <#if case.status==2>
-                                <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/press/turnuse?status=1&id=${case.id}'">
-                                    <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;启用</font></span>
-                                </button>
-                            </#if>
-                            <button type="button" class="btn btn-default" style="background-color: peachpuff" onclick="top.location.href='${pagecontext.request.contextpath}/press/romovepress?id=${case.id}'">
-                                <span class="glyphicon glyphicon-floppy-remove" style="color:red;" aria-hidden="true" ><font style="font-size: large">&nbsp;删除</font></span>
+                            <button class="keepborrowbook" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}" <#if case.status == 1> disabled="disabled"</#if>>
+                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;续借</font></span>
+                            </button>
+                            <button class="returnbook" type="button" class="btn btn-default" style="background-color: peachpuff"  typeid="${case.id}" <#if case.status == 1> disabled="disabled"</#if>>
+                                <span class="glyphicon glyphicon-floppy-save" style="color: #18d4cb;" aria-hidden="true" ><font style="font-size: large">&nbsp;归还</font></span>
                             </button>
                         </div>
                     </td>
@@ -221,16 +229,16 @@
                 </#if>
 
                 <#if pagebean.totalPage gt pagebean.page && pagebean.page != 1>
-                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page-1}">上一页</a></li>
-                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page+1}">下一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/user/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
                 </#if>
                 <#if pagebean.totalPage gt pagebean.page && pagebean.page == 1>
                     <li><a href="javascript:void(0)">上一页</a></li>
-                    <li><a href="${pagecontext.request.contextpath}/bookcase/getbookecaselist?page=${pagebean.page+1}">下一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/bookcase/getbookbanneruserlist?page=${pagebean.page+1}">下一页</a></li>
                 </#if>
 
                 <#if pagebean.totalPage == pagebean.page && pagebean.totalPage gt 1>
-                    <li><a href="${pagecontext.request.contextpath}/press/getbookepresslist?page=${pagebean.page-1}">上一页</a></li>
+                    <li><a href="${pagecontext.request.contextpath}/press/getbookbanneruserlist?page=${pagebean.page-1}">上一页</a></li>
                     <li><a href="javascript:void(0)">下一页</a></li>
                 </#if>
                 </ul>
@@ -251,6 +259,9 @@
 <!--script for this page-->
 <script src="${pagecontext.request.contextPath}/js/sparkline-chart.js"></script>
 <script src="${pagecontext.request.contextPath}/js/easy-pie-chart.js"></script>
+<script src="${pagecontext.request.contextPath}/js/myjs/selectjs.js"></script>
+<script src="${pagecontext.request.contextPath}/js/myjs/date.js"></script>
+<script src="${pagecontext.request.contextPath}/js/layer/layer.js"></script>
 <script>
     //owl carousel
     $(document).ready(function() {
@@ -267,6 +278,20 @@
     $(function(){
         $('select.styled').customSelect();
     });
+    //打开一个借书信息填充页面
+    $(".borrowbook").click(function(){
+        var readertypeid=$(this).attr("typeid");
+        var url='${pagecontext.request.contextpath}/borrow/toborrowpage?id='+readertypeid;
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['800px', '500px']
+            ,title: '修改信息'
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,content:url
+        });
+    })
 
     //打开一个新增页面弹窗
     function openaddpage(){
@@ -282,6 +307,7 @@
             ,content:url
         });
     }
+
 
 </script>
 

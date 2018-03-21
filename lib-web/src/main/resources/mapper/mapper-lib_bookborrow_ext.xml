@@ -2,7 +2,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="libBookborrowDao_EXT">
-<resultMap id="libBookborrow" type="com.lib.model.LibBookborrow">
+<resultMap id="LibBookborrowVO" type="com.lib.model.vo.LibBookborrowVO">
 
 <result property="backTime" column="back_time" />
 <result property="readerId" column="reader_id" />
@@ -15,17 +15,17 @@
 <sql id="sql_insert_column_list">
 <trim prefix="" prefixOverrides=",">
 
-<if test="entity.backTime !=null and entity.backTime !=''">,back_time </if>
+<if test="entity.backTime !=null">,back_time </if>
 
 <if test="entity.readerId !=null and entity.readerId !=''">,reader_id </if>
 
-<if test="entity.stipulateTime !=null and entity.stipulateTime !=''">,stipulate_time </if>
+<if test="entity.stipulateTime !=null">,stipulate_time </if>
 
 <if test="entity.id !=null and entity.id !=''">,id </if>
 
 <if test="entity.bookId !=null and entity.bookId !=''">,book_id </if>
 
-<if test="entity.borrowTime !=null and entity.borrowTime !=''">,borrow_time </if>
+<if test="entity.borrowTime !=null">,borrow_time </if>
 
 <if test="entity.operator !=null and entity.operator !=''">,operator </if>
 
@@ -35,17 +35,17 @@
 <sql id="sql_insert_property_list">
 <trim prefix="" prefixOverrides=",">
 
-<if test="entity.backTime !=null and entity.backTime !=''">,#{entity.backTime} </if>
+<if test="entity.backTime !=null">,#{entity.backTime} </if>
 
 <if test="entity.readerId !=null and entity.readerId !=''">,#{entity.readerId} </if>
 
-<if test="entity.stipulateTime !=null and entity.stipulateTime !=''">,#{entity.stipulateTime} </if>
+<if test="entity.stipulateTime !=null">,#{entity.stipulateTime} </if>
 
 <if test="entity.id !=null and entity.id !=''">,#{entity.id} </if>
 
 <if test="entity.bookId !=null and entity.bookId !=''">,#{entity.bookId} </if>
 
-<if test="entity.borrowTime !=null and entity.borrowTime !=''">,#{entity.borrowTime} </if>
+<if test="entity.borrowTime !=null">,#{entity.borrowTime} </if>
 
 <if test="entity.operator !=null and entity.operator !=''">,#{entity.operator} </if>
 
@@ -53,23 +53,23 @@
 </trim>
 </sql>
 <sql id="sql_column_list">
-back_time,
-reader_id,
-stipulate_time,
-id,
-book_id,
+lbbr.back_time,
+lbbr.reader_id,
+lbbr.stipulate_time,
+lbbr.id AS  id,
+lbbr.book_id,
 borrow_time,
-operator,
-status,
+lbbr.operator,
+lbbr.status
 </sql>
 <sql id="sql_update_set">
 <trim prefix="SET" prefixOverrides=",">
-<if test="entity != null"><if test="entity.backTime !=null and entity.backTime !=''">,back_time = #{entity.backTime}</if>
+<if test="entity != null"><if test="entity.backTime !=null">,back_time = #{entity.backTime}</if>
 <if test="entity.readerId !=null and entity.readerId !=''">,reader_id = #{entity.readerId}</if>
-<if test="entity.stipulateTime !=null and entity.stipulateTime !=''">,stipulate_time = #{entity.stipulateTime}</if>
+<if test="entity.stipulateTime !=null">,stipulate_time = #{entity.stipulateTime}</if>
 <if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
 <if test="entity.bookId !=null and entity.bookId !=''">,book_id = #{entity.bookId}</if>
-<if test="entity.borrowTime !=null and entity.borrowTime !=''">,borrow_time = #{entity.borrowTime}</if>
+<if test="entity.borrowTime !=null">,borrow_time = #{entity.borrowTime}</if>
 <if test="entity.operator !=null and entity.operator !=''">,operator = #{entity.operator}</if>
 <if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
 </if>
@@ -77,21 +77,13 @@ status,
 </sql>
 <sql id="sql_condition">
 <if test="condition != null">
-<if test="entity.backTime !=null and entity.backTime !=''">,back_time = #{entity.backTime}</if>
-<if test="condition.backTime !=null and condition.backTime !=''"> AND back_time = #{condition.backTime}</if>
-<if test="entity.readerId !=null and entity.readerId !=''">,reader_id = #{entity.readerId}</if>
+<if test="condition.backTime !=null '"> AND back_time = #{condition.backTime}</if>
 <if test="condition.readerId !=null and condition.readerId !=''"> AND reader_id = #{condition.readerId}</if>
-<if test="entity.stipulateTime !=null and entity.stipulateTime !=''">,stipulate_time = #{entity.stipulateTime}</if>
-<if test="condition.stipulateTime !=null and condition.stipulateTime !=''"> AND stipulate_time = #{condition.stipulateTime}</if>
-<if test="entity.id !=null and entity.id !=''">,id = #{entity.id}</if>
+<if test="condition.stipulateTime !=null"> AND stipulate_time = #{condition.stipulateTime}</if>
 <if test="condition.id !=null and condition.id !=''"> AND id = #{condition.id}</if>
-<if test="entity.bookId !=null and entity.bookId !=''">,book_id = #{entity.bookId}</if>
 <if test="condition.bookId !=null and condition.bookId !=''"> AND book_id = #{condition.bookId}</if>
-<if test="entity.borrowTime !=null and entity.borrowTime !=''">,borrow_time = #{entity.borrowTime}</if>
-<if test="condition.borrowTime !=null and condition.borrowTime !=''"> AND borrow_time = #{condition.borrowTime}</if>
-<if test="entity.operator !=null and entity.operator !=''">,operator = #{entity.operator}</if>
+<if test="condition.borrowTime !=null"> AND borrow_time = #{condition.borrowTime}</if>
 <if test="condition.operator !=null and condition.operator !=''"> AND operator = #{condition.operator}</if>
-<if test="entity.status !=null and entity.status !=''">,status = #{entity.status}</if>
 <if test="condition.status !=null and condition.status !=''"> AND status = #{condition.status}</if>
 </if>
 </sql>
@@ -111,4 +103,33 @@ limit ${startRow-1},#{limit}
 <if test="_parameter_containsKey('entity.status')">,status = #{entity.status}</if>
 </trim>
 </sql>
+    <select id="gethaveBorrowList" parameterType="java.util.Map" resultMap="LibBookborrowVO">
+        SELECT
+        <include refid="sql_column_list"/>
+        ,lbmn.username AS manaName
+        ,lbif.bookname AS bookname
+        ,lbr.name AS readerName
+        FROM lib_bookborrow lbbr
+        LEFT JOIN lib_manager lbmn ON lbmn.id=lbbr.operator
+        LEFT JOIN lib_bookinfo lbif ON lbif.id=lbbr.book_id
+        LEFT JOIN lib_reader lbr ON lbr.id=lbbr.reader_id
+        <if test="name!=null and name !=''">
+            WHERE exists (SELECT  1 FROM lib_reader lbr1 WHERE lbr1.name LIKE '${name}%')
+        </if>
+        limit #{start},#{end}
+    </select>
+    <select id="gethaveBorrowCount" parameterType="java.util.Map" resultMap="LibBookborrowVO">
+        SELECT
+        <include refid="sql_column_list"/>
+        ,lbmn.username AS manaName
+        ,lbif.bookname AS bookname
+        ,lbr.name AS readerName
+        FROM lib_bookborrow lbbr
+        LEFT JOIN lib_manager lbmn ON lbmn.id=lbbr.operator
+        LEFT JOIN lib_bookinfo lbif ON lbif.id=lbbr.book_id
+        LEFT JOIN lib_reader lbr ON lbr.id=lbbr.reader_id
+        <if test="name!=null and name !=''">
+            WHERE exists (SELECT  1 FROM lib_reader lbr1 WHERE lbr1.name LIKE '${name}%')
+        </if>
+    </select>
 </mapper>
