@@ -4,6 +4,7 @@ import com.lib.base.DAO;
 import com.lib.model.LibReader;
 import com.lib.model.vo.LibReaderVO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LibReaderDAO extends DAO<LibReader, LibReaderVO, String>{
@@ -17,4 +18,6 @@ public interface LibReaderDAO extends DAO<LibReader, LibReaderVO, String>{
     List<LibReaderVO> findBannerReader(LibReaderVO libReaderVO, Integer pagesize, Integer page,String startTime,String endTime);
 
     int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime);
+
+    Integer countRecentReader(Date time);
 }

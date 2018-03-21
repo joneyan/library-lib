@@ -196,4 +196,9 @@ limit ${startRow-1},#{limit}
             <include refid="sql_condition"/>
         </where>
     </select>
+
+    <select id="countRecentBook" parameterType="java.util.Map" resultMap="libBookinfo">
+        SELECT  * FROM lib_bookinfo
+        WHERE intime &gt; #{date} AND status =1
+    </select>
 </mapper>

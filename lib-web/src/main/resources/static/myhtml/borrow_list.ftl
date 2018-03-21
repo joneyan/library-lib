@@ -129,7 +129,7 @@
                     <ul class="sub">
                         <li class="active"><a class="" href="${pagecontext.request.contextpath}/borrow/toborrow">图书借阅</a></li>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书续借</a></li>
-                        <li><a class="" href="book_return.html">图书归还</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书归还</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -191,13 +191,11 @@
                     <td style="text-align: center;font-size: large;">${case.bookname}</td>
                     <td style="text-align: center;font-size: large;">${case.borrowTime?string("yyyy-MM-dd")}</td>
                     <td style="text-align: center;font-size: large;">${case.stipulateTime?string("yyyy-MM-dd")}</td>
-                    <#if case.backTime !=null>
+                    <#if case.backTime??>
                         <td style="text-align: center;font-size: large;">${case.backTime?string("yyyy-MM-dd")}</td>
+                        <#else>
+                            <td style="text-align: center;font-size: large;">未归还</td>
                     </#if>
-                    <#if case.backTime ==null>
-                        <td style="text-align: center;font-size: large;">未归还</td>
-                    </#if>
-
                     <td style="text-align: center;font-size: large;">${case.readerName}</td>
                     <td style="width: 245px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align: center;font-size: large;">${case.manaName}</td>
                     <#if case.status=='1'>
@@ -279,19 +277,35 @@
         $('select.styled').customSelect();
     });
     //打开一个借书信息填充页面
-    $(".borrowbook").click(function(){
+    $(".keepborrowbook").click(function(){
         var readertypeid=$(this).attr("typeid");
-        var url='${pagecontext.request.contextpath}/borrow/toborrowpage?id='+readertypeid;
-        layer.open({
-            type: 2 //Page层类型
-            ,area: ['800px', '500px']
-            ,title: '修改信息'
-            ,shade: 0.6 //遮罩透明度
-            ,maxmin: true //允许全屏最小化
-            ,anim: 1 //0-6的动画形式，-1不开启
-            ,content:url
-        });
-    })
+        var url='${pagecontext.request.contextpath}/borrow/keeplong?id='+readertypeid;
+        $.post(url,function(data){
+            if(data==1){
+                alert("操作成功");
+            }else if (data==2){
+                alert("操作失败");
+            }else{
+                alert("网关未开启！")
+            }
+            top.location.href='${pagecontext.request.getcontextpath}/borrow/tohaveborrows';
+        },"json")
+    });
+    //归还图书
+    $(".returnbook").click(function(){
+        var readertypeid=$(this).attr("typeid");
+        var url='${pagecontext.request.contextpath}/borrow/returnbook?id='+readertypeid;
+        $.post(url,function(data){
+            if(data==1){
+                alert("操作成功");
+            }else if (data==2){
+                alert("操作失败");
+            }else{
+                alert("网关未开启！")
+            }
+            top.location.href='${pagecontext.request.getcontextpath}/borrow/tohaveborrows';
+        },"json")
+    });
 
     //打开一个新增页面弹窗
     function openaddpage(){

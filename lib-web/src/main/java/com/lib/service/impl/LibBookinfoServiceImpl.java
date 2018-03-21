@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service("libBookinfoBO")
@@ -31,5 +33,17 @@ return libBookinfoDAO;
     @Override
     public Integer getBookListTotal(LibBookinfoVO libBookinfoVO, String startTime, String endTime) {
         return libBookinfoDAO.getBookListTotal( libBookinfoVO,  startTime,  endTime);
+    }
+
+    @Override
+    public Integer countRecentBook(Date date) {
+        if(date==null){
+            Date date1 = new Date();
+            Calendar instance = Calendar.getInstance();
+            instance.setTime(date1);
+            instance.add(Calendar.DAY_OF_MONTH,-30);
+            date = instance.getTime();
+        }
+        return libBookinfoDAO.countRecentBook(date);
     }
 }

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,5 +43,20 @@ return "libBookinfoDao";
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         return sqlSessionTemplate.selectList(getNamespace() + "_EXT.getBookListTotal", map).size();
+    }
+
+    @Override
+    public Integer countRecentBook(Date date) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("date",date);
+        return sqlSessionTemplate.selectList(getNamespace() + "_EXT.countRecentBook", map).size();
+    }
+
+    @Override
+    public Integer getEveryMothBorrow(Date start, Date end) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("start",start);
+        map.put("end",end);
+        return sqlSessionTemplate.selectList(getNamespace() + "_EXT.getEveryMothBorrow", map).size();
     }
 }

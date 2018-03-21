@@ -16,4 +16,6 @@ public interface LibBookborrowService extends BO<LibBookborrow, LibBookborrowVO,
     List<LibBookborrowVO> gethaveBorrowList(Integer pageNumber, String name, int i);
 
     Integer gethaveBorrowCount(String name);
+
+    List<Integer> getEveryMothBorrow();
 }

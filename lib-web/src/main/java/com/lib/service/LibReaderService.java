@@ -23,4 +23,6 @@ public interface LibReaderService extends BO<LibReader, LibReaderVO, String> {
      * @return
      */
     int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime);
+
+    Integer countRecentReader();
 }

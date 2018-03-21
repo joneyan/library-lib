@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -66,6 +67,22 @@ return libBookborrowDAO;
     @Override
     public Integer gethaveBorrowCount(String name) {
         return libBookborrowDAO.gethaveBorrowCount(name);
+    }
+
+    @Override
+    public List<Integer> getEveryMothBorrow() {
+        List<Integer> monthlist= new ArrayList<>();
+        Date date = new Date();
+        int year = date.getYear();
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        for(Integer month=0;month<12;month++){
+            start.set(year,month,1);
+            end.set(year,month+1,1);
+            Integer count = libBookinfoDAO.getEveryMothBorrow(start.getTime(),end.getTime());
+            monthlist.add(count);
+        }
+        return null;
     }
 
     private void dealBookBorrowEntity(Integer readerid, String bookid, LibBookborrow libBookborrow, LibManager loginfo) {

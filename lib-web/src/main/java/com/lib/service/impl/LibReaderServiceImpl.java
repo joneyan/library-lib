@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service("libReaderBO")
@@ -31,5 +33,15 @@ return libReaderDAO;
     @Override
     public int countCutoms(LibReaderVO libReaderVO,String startTime,String endTime) {
         return libReaderDAO.countCutoms(libReaderVO,startTime,endTime);
+    }
+
+    @Override
+    public Integer countRecentReader() {
+        Date date = new Date();
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        instance.add(Calendar.DAY_OF_MONTH,-30);
+        Date time = instance.getTime();
+        return libReaderDAO.countRecentReader(time);
     }
 }

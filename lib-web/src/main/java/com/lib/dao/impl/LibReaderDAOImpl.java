@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,5 +43,12 @@ return "libReaderDao";
         map.put("startTime",startTime);
         map.put("endTime",endTime);
         return sqlSessionTemplate.selectList(getNamespace()+"_EXT.countCutoms",map).size();
+    }
+
+    @Override
+    public Integer countRecentReader(Date time) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("date",time);
+        return sqlSessionTemplate.selectList(getNamespace()+"_EXT.countRecentReader",map).size();
     }
 }

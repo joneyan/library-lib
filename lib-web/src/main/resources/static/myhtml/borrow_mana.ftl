@@ -129,7 +129,7 @@
                     <ul class="sub">
                         <li class="active"><a class="" href="${pagecontext.request.contextpath}/borrow/toborrow">图书借阅</a></li>
                         <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书续借</a></li>
-                        <li><a class="" href="book_return.html">图书归还</a></li>
+                        <li><a class="" href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">图书归还</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -159,9 +159,9 @@
         <section class="wrapper" >
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active" ><a href="${pagecontext.request.getcontextpath}/borrow/toborrow">图书列表</a></li>
-                <li role="presentation"><a href="${pagecontext.request.getcontextpath}/borrow/tohaveborrow">已借图书</a></li>
+                <li role="presentation"><a href="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">已借图书</a></li>
             </ul>
-            <form class="form-inline" action="${pagecontext.request.getcontextpath}/borrow/toborrow">
+            <form class="form-inline" action="${pagecontext.request.getcontextpath}/borrow/tohaveborrows">
 
                 <label for="bookname">图书名字：</label>
                 <div class="form-group">

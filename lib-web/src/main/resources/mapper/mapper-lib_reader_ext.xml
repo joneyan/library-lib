@@ -217,4 +217,8 @@ limit ${startRow-1},#{limit}
 
         ORDER BY updatedate DESC
     </select>
+    <select id="countRecentReader" parameterType="java.util.Map" resultMap="libReader">
+        SELECT  * FROM lib_reader
+        WHERE createdate &gt; #{date} AND bannertime IS NULL
+    </select>
 </mapper>

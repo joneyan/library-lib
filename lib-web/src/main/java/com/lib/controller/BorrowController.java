@@ -89,6 +89,7 @@ public class BorrowController {
                             LibReadertype libReadertype = libReadertypeService.get(libReader.getTypeid() + "");
                             LibBookborrowVO libBookborrowVO = new LibBookborrowVO();
                             libBookborrowVO.setReaderId(libReader.getId());
+                            libBookborrowVO.setStatus(2);
                             List<LibBookborrow> libBookborrows = libBookborrowService.find(libBookborrowVO);
                             int size = libBookborrows.size();
                             if(libReadertype.getBrownum()>size){
@@ -133,6 +134,14 @@ public class BorrowController {
         return data;
     }
 
+    /**
+     * 得到借出的图书
+     * @param request
+     * @param model
+     * @param name
+     * @param pageNumber
+     * @return
+     */
     @RequestMapping("tohaveborrows")
     public String gethaveBorrowList(HttpServletRequest request,Model model,
                                     @RequestParam(required = false) String name,
@@ -148,6 +157,70 @@ public class BorrowController {
         model.addAttribute("pagebean",libReaderVOPageBean);
         model.addAttribute("name",name);
         return "borrow_list";
+    }
+
+    /**
+     * 续借
+     * @param request
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("keeplong")
+    @ResponseBody
+    public String keepLong(HttpServletRequest request,Model model ,Integer id){
+        String data=null;
+        LibBookborrow libBookborrow = libBookborrowService.get(id + "");
+        if(libBookborrow!=null){
+            Integer bookId = libBookborrow.getBookId();
+            LibBookinfo libBookinfo = libBookinfoService.get(bookId + "");
+            Integer typeid = libBookinfo.getTypeid();
+            LibBooktype libBooktype = libBooktypeService.get(typeid + "");
+            Date stipulateTime = libBookborrow.getStipulateTime();
+            Calendar instance = Calendar.getInstance();
+            instance.setTime(stipulateTime);
+            instance.add(Calendar.DAY_OF_MONTH, libBooktype.getDays());
+            Date time = instance.getTime();
+            libBookborrow.setStipulateTime(time);
+            int update = libBookborrowService.update(libBookborrow, id + "");
+            if(update>0){
+                data="1";
+
+            }else{
+                data="2";
+            }
+        }else{
+            data="2";
+        }
+        return data;
+    }
+
+    @RequestMapping("returnbook")
+    @ResponseBody
+    public String returnBook(HttpServletRequest request, Model model,String id){
+        String data=null;
+        LibBookborrow libBookborrow = libBookborrowService.get(id + "");
+        if(libBookborrow !=null){
+            libBookborrow.setStatus(1);
+            libBookborrow.setBackTime(new Date());
+            int update = libBookborrowService.update(libBookborrow, id + "");
+            if(update>0){
+                Integer bookId = libBookborrow.getBookId();
+                LibBookinfo libBookinfo = libBookinfoService.get(bookId + "");
+                Integer leftnum = libBookinfo.getLeftnum()+1;
+                libBookinfo.setLeftnum(leftnum);
+                int update1 = libBookinfoService.update(libBookinfo, bookId + "");
+                if(update1>0){
+                    data="1";
+                }
+
+            }else{
+                data="2";
+            }
+        }else{
+            data="2";
+        }
+        return data;
     }
 
 

@@ -132,4 +132,10 @@ limit ${startRow-1},#{limit}
             WHERE exists (SELECT  1 FROM lib_reader lbr1 WHERE lbr1.name LIKE '${name}%')
         </if>
     </select>
+
+    <select id="getEveryMothBorrow" resultMap="LibBookborrowVO" parameterType="java.util.Map">
+        SELECT * FROM lib_bookborrow
+        WHERE
+        borrow_time BETWEEN #{start} AND #{end}
+    </select>
 </mapper>
