@@ -59,4 +59,10 @@ return "libBookinfoDao";
         map.put("end",end);
         return sqlSessionTemplate.selectList(getNamespace() + "_EXT.getEveryMothBorrow", map).size();
     }
+
+    @Override
+    public List<LibBookinfoVO> getNewFiveTop() {
+        HashMap<String, Object> map = new HashMap<>();
+        return sqlSessionTemplate.selectList(getNamespace() + "_EXT.getNewFiveTop", map);
+    }
 }

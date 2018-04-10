@@ -138,4 +138,19 @@ limit ${startRow-1},#{limit}
         WHERE
         borrow_time BETWEEN #{start} AND #{end}
     </select>
+
+    <select id="getBorrowListTopFive" resultMap="LibBookborrowVO" parameterType="java.util.Map">
+        SELECT
+        <include refid="sql_column_list"/>
+        ,lbmn.username AS manaName
+        ,lbif.bookname AS bookname
+        ,lbr.name AS readerName
+        ,COUNT(*) AS totalBorrow
+        FROM lib_bookborrow lbbr
+        LEFT JOIN lib_manager lbmn ON lbmn.id=lbbr.operator
+        LEFT JOIN lib_bookinfo lbif ON lbif.id=lbbr.book_id
+        LEFT JOIN lib_reader lbr ON lbr.id=lbbr.reader_id
+        GROUP BY lbbr.book_id   ORDER BY totalBorrow DESC
+        limit 0,5
+    </select>
 </mapper>

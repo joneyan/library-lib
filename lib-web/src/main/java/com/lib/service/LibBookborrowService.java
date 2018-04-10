@@ -6,6 +6,7 @@ import com.lib.model.LibBookborrow;
 import com.lib.model.LibManager;
 import com.lib.model.LibReader;
 import com.lib.model.vo.LibBookborrowVO;
+import com.lib.model.vo.LibBookinfoVO;
 import com.lib.model.vo.LibReaderVO;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface LibBookborrowService extends BO<LibBookborrow, LibBookborrowVO,
     Integer gethaveBorrowCount(String name);
 
     List<Integer> getEveryMothBorrow();
+
+    List<LibBookborrowVO> getBorrowListTopFive();
+
+    List<LibBookinfoVO> getNewFiveTop();
 }

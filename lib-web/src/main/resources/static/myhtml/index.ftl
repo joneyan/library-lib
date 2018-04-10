@@ -275,7 +275,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="">
-                    <a class="" href="index.html">
+                    <a class="" href="${pagecontext.request.getcontextpath}/index">
                         <i class="icon-dashboard"></i>
                         <span>首页</span>
                     </a>
@@ -371,7 +371,7 @@
                             <i class="icon-user"></i>
                         </div>
                         <div class="value">
-                            <a href="#"> <h1></h1>
+                            <a href="#"> <h1>${readercount}</h1>
                                 <p>新读者</p></a>
                         </div>
                     </section>
@@ -382,7 +382,7 @@
                             <i class="icon-tags"></i>
                         </div>
                         <div class="value">
-                            <a href="#"> <h1></h1>
+                            <a href="#"> <h1>${borrowcount}</h1>
                                 <p>借出数量</p></a>
                         </div>
                     </section>
@@ -393,7 +393,7 @@
                             <i class="icon-shopping-cart"></i>
                         </div>
                         <div class="value">
-                            <a href="#"><h1>345</h1>
+                            <a href="#"><h1>${newbookcount}</h1>
                                 <p>近期入馆图书</p></a>
                         </div>
                     </section>
@@ -404,7 +404,7 @@
                             <i class="icon-bar-chart"></i>
                         </div>
                         <div class="value">
-                            <a href="#"><h1>34,500</h1>
+                            <a href="#"><h1>${booktotalcount}</h1>
                                 <p>图书馆藏书</p></a>
                         </div>
                     </section>
@@ -419,54 +419,12 @@
                         <h3>今年每月借书</h3>
                     </div>
                     <div class="custom-bar-chart">
+                        <#list monthlist as moth>
                         <div class="bar">
-                            <div class="title">一月</div>
-                            <div class="value tooltips" data-original-title="80%" data-toggle="tooltip" data-placement="top">80%</div>
+                            <div class="title">${moth.month}</div>
+                            <div class="value tooltips" data-original-title="${moth.count}" data-toggle="tooltip" data-placement="top">${moth.finalradio}</div>
                         </div>
-                        <div class="bar doted">
-                            <div class="title">二月</div>
-                            <div class="value tooltips" data-original-title="50%" data-toggle="tooltip" data-placement="top">50%</div>
-                        </div>
-                        <div class="bar ">
-                            <div class="title">三月</div>
-                            <div class="value tooltips" data-original-title="40%" data-toggle="tooltip" data-placement="top">40%</div>
-                        </div>
-                        <div class="bar doted">
-                            <div class="title">四月</div>
-                            <div class="value tooltips" data-original-title="55%" data-toggle="tooltip" data-placement="top">55%</div>
-                        </div>
-                        <div class="bar">
-                            <div class="title">五月</div>
-                            <div class="value tooltips" data-original-title="20%" data-toggle="tooltip" data-placement="top">20%</div>
-                        </div>
-                        <div class="bar doted">
-                            <div class="title">六月</div>
-                            <div class="value tooltips" data-original-title="39%" data-toggle="tooltip" data-placement="top">39%</div>
-                        </div>
-                        <div class="bar">
-                            <div class="title">七月</div>
-                            <div class="value tooltips" data-original-title="75%" data-toggle="tooltip" data-placement="top">75%</div>
-                        </div>
-                        <div class="bar doted">
-                            <div class="title">八月</div>
-                            <div class="value tooltips" data-original-title="45%" data-toggle="tooltip" data-placement="top">45%</div>
-                        </div>
-                        <div class="bar ">
-                            <div class="title">九月</div>
-                            <div class="value tooltips" data-original-title="50%" data-toggle="tooltip" data-placement="top">50%</div>
-                        </div>
-                        <div class="bar doted">
-                            <div class="title">十月</div>
-                            <div class="value tooltips" data-original-title="42%" data-toggle="tooltip" data-placement="top">42%</div>
-                        </div>
-                        <div class="bar ">
-                            <div class="title">十一月</div>
-                            <div class="value tooltips" data-original-title="60%" data-toggle="tooltip" data-placement="top">60%</div>
-                        </div>
-                        <div class="bar doted">
-                            <div class="title">十二月</div>
-                            <div class="value tooltips" data-original-title="90%" data-toggle="tooltip" data-placement="top">90%</div>
-                        </div>
+                        </#list>
                     </div>
                     <!--custom chart end-->
                 </div>
@@ -656,92 +614,93 @@
                             </div>
 
                             <div class="timeline">
+                                <#list topfivelist as list>
+                                <#if list_index==0>
                                 <article class="timeline-item">
                                     <div class="timeline-desk">
                                         <div class="panel">
                                             <div class="panel-body">
                                                 <span class="arrow"></span>
                                                 <span class="timeline-icon red"></span>
-                                                <span class="timeline-date">08:25 am</span>
-                                                <h1 class="red">12 July | Sunday</h1>
+                                                <span class="timeline-date">${list.intime?string.short}</span>
+                                                <h1 class="red">${list.intime?string('yyyy-MM-dd')}</h1>
                                                 <p>Lorem ipsum dolor sit amet consiquest dio</p>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
+                                </#if>
+                                </#list>
+
+                                <#list topfivelist as list>
+                                <#if list_index==1>
                                 <article class="timeline-item alt">
                                     <div class="timeline-desk">
                                         <div class="panel">
                                             <div class="panel-body">
                                                 <span class="arrow-alt"></span>
                                                 <span class="timeline-icon green"></span>
-                                                <span class="timeline-date">10:00 am</span>
-                                                <h1 class="green">10 July | Wednesday</h1>
-                                                <p><a href="#">Jonathan Smith</a> added new milestone <span><a href="#" class="green">ERP</a></span></p>
+                                                <span class="timeline-date">${list.intime?string.short}</span>
+                                                <h1 class="green">${list.intime?string('yyyy-MM-dd')}</h1>
+                                                <p><a href="#">${list.author}</a> ${list.bookname} <span><a href="#" class="green"></a></span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
+                                </#if>
+                                </#list>
+                                <#list topfivelist as list>
+                                    <#if list_index==2>
                                 <article class="timeline-item">
                                     <div class="timeline-desk">
                                         <div class="panel">
                                             <div class="panel-body">
                                                 <span class="arrow"></span>
                                                 <span class="timeline-icon blue"></span>
-                                                <span class="timeline-date">11:35 am</span>
-                                                <h1 class="blue">05 July | Monday</h1>
-                                                <p><a href="#">Anjelina Joli</a> added new album <span><a href="#" class="blue">PARTY TIME</a></span></p>
-                                                <div class="album">
-                                                    <a href="#">
-                                                        <img alt="" src="${pagecontext.request.getcontextpath}/img/sm-img-1.jpg">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img alt="" src="${pagecontext.request.getcontextpath}/img/sm-img-2.jpg">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img alt="" src="${pagecontext.request.getcontextpath}/img/sm-img-3.jpg">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img alt="" src="${pagecontext.request.getcontextpath}/img/sm-img-1.jpg">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img alt="" src="${pagecontext.request.getcontextpath}/img/sm-img-2.jpg">
-                                                    </a>
-                                                </div>
+                                                <span class="timeline-date">${list.intime?string.short}</span>
+                                                <h1 class="blue">${list.intime?string('yyyy-MM-dd')}</h1>
+                                                <p><a href="#">${list.author}</a>${list.bookname} <span><a href="#" class="blue"></a></span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
+                                    </#if>
+                                </#list>
+                                <#list topfivelist as list>
+                                    <#if list_index==3>
                                 <article class="timeline-item alt">
                                     <div class="timeline-desk">
                                         <div class="panel">
                                             <div class="panel-body">
                                                 <span class="arrow-alt"></span>
                                                 <span class="timeline-icon purple"></span>
-                                                <span class="timeline-date">3:20 pm</span>
-                                                <h1 class="purple">29 June | Saturday</h1>
-                                                <p>Lorem ipsum dolor sit amet consiquest dio</p>
-                                                <div class="notification">
-                                                    <i class=" icon-exclamation-sign"></i> New task added for <a href="#">Denial Collins</a>
-                                                </div>
+                                                <span class="timeline-date">${list.intime?string.short}</span>
+                                                <h1 class="purple">${list.intime?string('yyyy-MM-dd')}</h1>
+                                                <p><a href="#">${list.author}</a>${list.bookname} <span><a href="#" class="blue"></a></span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
+                                </#if>
+                                </#list>
+                        <#list topfivelist as list>
+                            <#if list_index==4>
                                 <article class="timeline-item">
                                     <div class="timeline-desk">
                                         <div class="panel">
                                             <div class="panel-body">
                                                 <span class="arrow"></span>
                                                 <span class="timeline-icon light-green"></span>
-                                                <span class="timeline-date">07:49 pm</span>
-                                                <h1 class="light-green">10 June | Friday</h1>
-                                                <p><a href="#">Jonatha Smith</a> added new milestone <span><a href="#" class="light-green">prank</a></span> Lorem ipsum dolor sit amet consiquest dio</p>
+                                                <span class="timeline-date">${list.intime?string.short}</span>
+                                                <h1 class="light-green">${list.intime?string('yyyy-MM-dd')}</h1>
+                                                <p><a href="#">${list.author}</a>${list.bookname} <span><a href="#" class="light-green"></a></span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
                             </div>
+                        </#if>
+                        </#list>
 
                             <div class="clearfix">&nbsp;</div>
                         </div>
@@ -755,11 +714,11 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <i class="icon-cloud"></i>
-                                    California
+                                    ${weather.HeWeather6[0].basic.location}
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="degree">
-                                        24°
+                                    ${weather.HeWeather6[0].now.tmp}°
                                     </div>
                                 </div>
                             </div>
@@ -769,16 +728,16 @@
                     <footer class="weather-category">
                         <ul>
                             <li class="active">
-                                <h5>humidity</h5>
-                                56%
+                                <h5>湿度</h5>
+                            ${weather.HeWeather6[0].now.hum}%
                             </li>
                             <li>
-                                <h5>precip</h5>
-                                1.50 in
+                                <h5>降雨</h5>
+                            ${weather.HeWeather6[0].now.pres} in
                             </li>
                             <li>
-                                <h5>winds</h5>
-                                10 mph
+                                <h5>风向</h5>
+                            ${weather.HeWeather6[0].now.wind_dir}
                             </li>
                         </ul>
                     </footer>
@@ -833,6 +792,22 @@
             ,content:url
         });
     }
+
+    function getInfo(){
+
+        var url='${pagecontext.request.contextpath}/maintain/statistics';
+        top.location.href=url;
+
+
+    };
+    $(function () {
+
+        setInterval(getInfo,40000)
+
+    });
+    $(function(){
+        getInfo();
+    })
 
 </script>
 

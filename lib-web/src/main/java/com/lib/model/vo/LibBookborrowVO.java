@@ -6,6 +6,15 @@ public class LibBookborrowVO extends LibBookborrow{
     private String readerName;
     private String manaName;
     private String bookname;
+    private String totalBorrow;
+
+    public String getTotalBorrow() {
+        return totalBorrow;
+    }
+
+    public void setTotalBorrow(String totalBorrow) {
+        this.totalBorrow = totalBorrow;
+    }
 
     public String getReaderName() {
         return readerName;

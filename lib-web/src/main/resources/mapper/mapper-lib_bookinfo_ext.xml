@@ -201,4 +201,10 @@ limit ${startRow-1},#{limit}
         SELECT  * FROM lib_bookinfo
         WHERE intime &gt; #{date} AND status =1
     </select>
+
+    <select id="getNewFiveTop" parameterType="java.util.Map" resultMap="libBookinfo">
+        SELECT  * FROM lib_bookinfo
+        ORDER BY intime DESC
+        limit 0,5
+    </select>
 </mapper>

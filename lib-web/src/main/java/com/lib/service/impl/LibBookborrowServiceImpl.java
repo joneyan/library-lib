@@ -73,16 +73,29 @@ return libBookborrowDAO;
     public List<Integer> getEveryMothBorrow() {
         List<Integer> monthlist= new ArrayList<>();
         Date date = new Date();
-        int year = date.getYear();
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        int year = instance.get(Calendar.YEAR);
+
         Calendar start = Calendar.getInstance();
         Calendar end = Calendar.getInstance();
         for(Integer month=0;month<12;month++){
             start.set(year,month,1);
             end.set(year,month+1,1);
-            Integer count = libBookinfoDAO.getEveryMothBorrow(start.getTime(),end.getTime());
+            Integer count = libBookborrowDAO.getEveryMothBorrow(start.getTime(),end.getTime());
             monthlist.add(count);
         }
-        return null;
+        return monthlist;
+    }
+
+    @Override
+    public List<LibBookborrowVO> getBorrowListTopFive() {
+        return libBookborrowDAO.getBorrowListTopFive();
+    }
+
+    @Override
+    public List<LibBookinfoVO> getNewFiveTop() {
+        return libBookinfoDAO.getNewFiveTop();
     }
 
     private void dealBookBorrowEntity(Integer readerid, String bookid, LibBookborrow libBookborrow, LibManager loginfo) {

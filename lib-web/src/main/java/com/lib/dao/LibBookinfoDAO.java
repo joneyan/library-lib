@@ -17,4 +17,6 @@ public interface LibBookinfoDAO extends DAO<LibBookinfo, LibBookinfoVO, String>{
 
 
     Integer getEveryMothBorrow(Date start, Date end);
+
+    List<LibBookinfoVO> getNewFiveTop();
 }
