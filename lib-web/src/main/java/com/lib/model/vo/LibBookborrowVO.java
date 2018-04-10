@@ -2,17 +2,33 @@ package com.lib.model.vo;
 
 import com.lib.model.LibBookborrow;
 
+import java.text.DecimalFormat;
+
 public class LibBookborrowVO extends LibBookborrow{
     private String readerName;
     private String manaName;
     private String bookname;
-    private String totalBorrow;
+    private Double totalBorrow;
+    private String  pecent;
 
-    public String getTotalBorrow() {
+    public String getPecent() {
+        return pecent;
+    }
+
+/*    public void setPecent(Double total) {
+
+        this.pecent = (this.totalBorrow/total)*100+"%";
+    }*/
+
+    public void setPecent(String pecent) {
+        this.pecent = pecent;
+    }
+
+    public Double getTotalBorrow() {
         return totalBorrow;
     }
 
-    public void setTotalBorrow(String totalBorrow) {
+    public void setTotalBorrow(Double totalBorrow) {
         this.totalBorrow = totalBorrow;
     }
 

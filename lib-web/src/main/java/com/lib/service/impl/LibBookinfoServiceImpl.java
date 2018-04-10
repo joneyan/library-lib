@@ -46,4 +46,9 @@ return libBookinfoDAO;
         }
         return libBookinfoDAO.countRecentBook(date);
     }
+
+    @Override
+    public List<LibBookinfoVO> getNewFiveTop() {
+        return libBookinfoDAO.getNewFiveTop();
+    }
 }

@@ -1,6 +1,7 @@
 package com.lib.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lib.base.OrderBy;
 import com.lib.model.LibBookborrow;
 import com.lib.model.LibBookinfo;
 import com.lib.model.vo.LibBookborrowVO;
@@ -90,15 +91,26 @@ public class MainController {
 
         //书籍的借书排行
         List<LibBookborrowVO> toplist =  libBookborrowService.getBorrowListTopFive();
+        Double total=0.0;
+        for (LibBookborrowVO  lib:toplist){
+            total+=lib.getTotalBorrow();
+        }
+        for (LibBookborrowVO  lib:toplist){
+            lib.setPecent((lib.getTotalBorrow()/total)*100+"%");
+        }
         model.addAttribute("topfivelist",toplist);
-
+        OrderBy orderBy = new OrderBy();
+        orderBy.add("intime",false);
+        //最近的书籍
+        List<LibBookinfoVO> recentBooks = libBookinfoService.getNewFiveTop();
+        model.addAttribute("recentbooks",recentBooks);
 
         List<LibBookinfoVO> bookList = libBookborrowService.getNewFiveTop();
         model.addAttribute("bookTop",bookList);
         JSONObject weather = getWeather();
         model.addAttribute("weather",weather);
 
-        return "index";
+        return "index2";
     }
 
     /**

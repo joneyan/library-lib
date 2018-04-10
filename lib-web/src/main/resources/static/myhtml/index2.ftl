@@ -781,9 +781,6 @@
         setInterval(getInfo,40000)
 
     });
-    $(function(){
-        getInfo();
-    })
 
 </script>
 

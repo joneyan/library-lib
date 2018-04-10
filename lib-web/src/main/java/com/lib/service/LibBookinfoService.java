@@ -13,4 +13,6 @@ public interface LibBookinfoService extends BO<LibBookinfo, LibBookinfoVO, Strin
     Integer getBookListTotal(LibBookinfoVO libBookinfoVO, String startTime, String endTime);
 
     Integer countRecentBook(Date date);
+
+    List<LibBookinfoVO> getNewFiveTop();
 }
